@@ -1,9 +1,14 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <h1 className="text-2xl text-red-500">Dashboard</h1>
+      <Routes>
+        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/login" element={<h1>Login</h1>} />
+        <Route path="/users" element={<h1>Users</h1>} />
+      </Routes>
     </>
   );
 }
