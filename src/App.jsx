@@ -8,7 +8,7 @@ import Users from "./pages/Users";
 function App() {
   return (
     <>
-      <div>
+      <div className="bg-gray-100 w-full h-full">
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<Home></Home>} />

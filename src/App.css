@@ -5,5 +5,5 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  background-color: gray;
+  background-color: var(--color-gray-100);
 }

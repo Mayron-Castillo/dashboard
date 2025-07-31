@@ -30,16 +30,31 @@ function Users() {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div>
-      <ul>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        Usuarios
+      </h1>
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {users.map((user) => (
-          <li key={user.id}>
-            <p>{user.name}</p>
-            <p>{user.email}</p>
-            <p>{user.phone}</p>
-          </li>
+          <div
+            key={user.id}
+            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+          >
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              {user.name}
+            </h2>
+            <hr className="p-2" />
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-600">
+                <span className="font-medium">Email:</span> {user.email}
+              </p>
+              <p className="text-gray-600">
+                <span className="font-medium">Teléfono:</span> {user.phone}
+              </p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
