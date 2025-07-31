@@ -51,6 +51,14 @@ function Users() {
               <p className="text-gray-600">
                 <span className="font-medium">Teléfono:</span> {user.phone}
               </p>
+              <button
+                onClick={() => {
+                  setUsers((prev) => prev.filter((u) => u.id !== user.id));
+                }}
+                className="bg-red-500 hover:bg-red-600 text-white p-2 mt-2 rounded cursor-pointer"
+              >
+                Eliminar
+              </button>
             </div>
           </div>
         ))}

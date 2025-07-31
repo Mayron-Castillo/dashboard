@@ -10,7 +10,8 @@ function Navbar() {
       {user ? (
         <>
           <p>{user.name}</p>
-          <Link to="/" onClick={logout}>
+          <Link to="/">Home</Link>
+          <Link to="/login" onClick={logout}>
             Cerrar Sesion
           </Link>
         </>

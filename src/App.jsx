@@ -13,7 +13,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>} />
           <Route path="/login" element={<Login></Login>} />
-          <Route path="/unauthorized" element={<h1>unauthorized</h1>} />
           <Route
             path="/users"
             element={
