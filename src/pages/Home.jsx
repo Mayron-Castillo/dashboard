@@ -15,9 +15,12 @@ function Home() {
         </div>
       ) : (
         <div className="text-2xl flex flex-col gap-2">
-          <h1>Bienvenido, debes iniciar sesion</h1>
-          <Link to="/login" className="bg-blue-200 p-2 text-center rounded">
-            Iniciar Sesion
+          <h1>Bienvenido, debes iniciar sesión</h1>
+          <Link
+            to="/login"
+            className="bg-blue-600 p-2 text-center rounded text-white hover:bg-blue-700"
+          >
+            Iniciar Sesión
           </Link>
         </div>
       )}
