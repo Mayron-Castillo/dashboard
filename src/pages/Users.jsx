@@ -6,6 +6,7 @@ function Users() {
   const [error, setError] = useState(null);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({ name: "", email: "" });
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -31,13 +32,27 @@ function Users() {
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>{error.message}</p>;
 
+  const filterUsers = users.filter((user) => {
+    return user.name.toLowerCase().includes(filter.toLowerCase());
+  });
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Usuarios
       </h1>
+
+      <input
+        type="text"
+        placeholder="Buscar usuario"
+        className="border-2 border-gray-300 p-2 mb-2"
+        onChange={(e) => {
+          setFilter(e.target.value);
+        }}
+      />
+
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {users.map((user) => (
+        {filterUsers.map((user) => (
           <div key={user.id} className="bg-white rounded-lg shadow-md p-6">
             {editId === user.id ? (
               <input
