@@ -42,14 +42,17 @@ function Users() {
         Usuarios
       </h1>
 
-      <input
-        type="text"
-        placeholder="Buscar usuario"
-        className="border-2 border-gray-300 p-2 mb-2"
-        onChange={(e) => {
-          setFilter(e.target.value);
-        }}
-      />
+      <div className="w-full flex justify-center ">
+        <input
+          type="text"
+          placeholder="Buscar usuario"
+          className="border-2 border-gray-400 w-4/12 p-2 mb-2 flex justify-center items-center"
+          value={filter}
+          onChange={(e) => {
+            setFilter(e.target.value);
+          }}
+        />
+      </div>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filterUsers.map((user) => (
