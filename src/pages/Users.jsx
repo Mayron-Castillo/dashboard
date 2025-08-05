@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "../auth/ThemeContext";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -7,6 +8,7 @@ function Users() {
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({ name: "", email: "" });
   const [filter, setFilter] = useState("");
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,8 +39,20 @@ function Users() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div
+      className={
+        theme === "light"
+          ? "min-h-screen bg-gray-100 p-6"
+          : "min-h-screen bg-gray-800 p-6"
+      }
+    >
+      <h1
+        className={
+          theme === "light"
+            ? "text-3xl font-bold text-center text-gray-600 mb-8"
+            : "text-3xl font-bold text-center text-white mb-8"
+        }
+      >
         Usuarios
       </h1>
 
@@ -46,7 +60,11 @@ function Users() {
         <input
           type="text"
           placeholder="Buscar usuario"
-          className="border-2 border-gray-400 w-4/12 p-2 mb-2 flex justify-center items-center"
+          className={
+            theme === "light"
+              ? "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-black"
+              : "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-white"
+          }
           value={filter}
           onChange={(e) => {
             setFilter(e.target.value);
@@ -56,7 +74,14 @@ function Users() {
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filterUsers.map((user) => (
-          <div key={user.id} className="bg-white rounded-lg shadow-md p-6">
+          <div
+            key={user.id}
+            className={
+              theme === "light"
+                ? "bg-white rounded-lg shadow-md p-6 text-gray-600 border-2 border-gray-600"
+                : "bg-gray-800 rounded-lg shadow-md p-6 text-white border-2 border-gray-600"
+            }
+          >
             {editId === user.id ? (
               <input
                 type="text"
@@ -64,16 +89,14 @@ function Users() {
                 onChange={(e) =>
                   setEditData({ ...editData, name: e.target.value })
                 }
-                className="text-xl font-semibold text-gray-800 mb-3"
+                className="text-xl font-semibold mb-3"
               />
             ) : (
-              <h2 className="text-xl font-semibold text-gray-800 mb-3">
-                {user.name}
-              </h2>
+              <h2 className="text-xl font-semibold mb-3">{user.name}</h2>
             )}
-            <hr className="p-2" />
+            <hr className={theme === "light" ? "p-2" : "p-2 text-gray-600"} />
             <div className="flex flex-col gap-2">
-              <p className="text-gray-600">
+              <p>
                 <span className="font-medium pr-2">Email:</span>
                 {editId === user.id ? (
                   <input
@@ -88,7 +111,7 @@ function Users() {
                 )}
               </p>
 
-              <p className="text-gray-600">
+              <p>
                 <span className="font-medium pr-2">Teléfono:</span>
                 {editId === user.id ? (
                   <input
