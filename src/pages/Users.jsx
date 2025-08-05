@@ -31,7 +31,18 @@ function Users() {
     fetchUsers();
   }, []);
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading)
+    return (
+      <p
+        className={
+          theme === "light"
+            ? "bg-white min-h-screen"
+            : "bg-gray-800 min-h-screen"
+        }
+      >
+        Cargando...
+      </p>
+    );
   if (error) return <p>{error.message}</p>;
 
   const filterUsers = users.filter((user) => {
