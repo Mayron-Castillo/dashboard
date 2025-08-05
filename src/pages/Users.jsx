@@ -43,7 +43,18 @@ function Users() {
         Cargando...
       </p>
     );
-  if (error) return <p>{error.message}</p>;
+  if (error)
+    return (
+      <p
+        className={
+          theme === "light"
+            ? "bg-white min-h-screen"
+            : "bg-gray-800 min-h-screen"
+        }
+      >
+        {error.message}
+      </p>
+    );
 
   const filterUsers = users.filter((user) => {
     return user.name.toLowerCase().includes(filter.toLowerCase());
@@ -60,8 +71,8 @@ function Users() {
       <h1
         className={
           theme === "light"
-            ? "text-3xl font-bold text-center text-gray-600 mb-8"
-            : "text-3xl font-bold text-center text-white mb-8"
+            ? "text-3xl font-bold text-center text-gray-700 mb-8"
+            : "text-3xl font-bold text-center text-gray-300 mb-8"
         }
       >
         Usuarios
@@ -74,7 +85,7 @@ function Users() {
           className={
             theme === "light"
               ? "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-black"
-              : "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-white"
+              : "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-gray-300"
           }
           value={filter}
           onChange={(e) => {
@@ -84,109 +95,123 @@ function Users() {
       </div>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {filterUsers.map((user) => (
-          <div
-            key={user.id}
+        {filterUsers.length === 0 ? (
+          <p
             className={
               theme === "light"
-                ? "bg-white rounded-lg shadow-md p-6 text-gray-600 border-2 border-gray-600"
-                : "bg-gray-800 rounded-lg shadow-md p-6 text-white border-2 border-gray-600"
+                ? "text-black w-full text-center"
+                : "text-gray-400 w-full text-center grid place-items-center"
             }
           >
-            {editId === user.id ? (
-              <input
-                type="text"
-                value={editData.name}
-                onChange={(e) =>
-                  setEditData({ ...editData, name: e.target.value })
-                }
-                className="text-xl font-semibold mb-3"
-              />
-            ) : (
-              <h2 className="text-xl font-semibold mb-3">{user.name}</h2>
-            )}
-            <hr className={theme === "light" ? "p-2" : "p-2 text-gray-600"} />
-            <div className="flex flex-col gap-2">
-              <p>
-                <span className="font-medium pr-2">Email:</span>
-                {editId === user.id ? (
-                  <input
-                    type="email"
-                    value={editData.email}
-                    onChange={(e) =>
-                      setEditData({ ...editData, email: e.target.value })
-                    }
-                  />
-                ) : (
-                  user.email
-                )}
-              </p>
-
-              <p>
-                <span className="font-medium pr-2">Teléfono:</span>
-                {editId === user.id ? (
-                  <input
-                    type="phone"
-                    value={editData.phone}
-                    onChange={(e) =>
-                      setEditData({ ...editData, phone: e.target.value })
-                    }
-                  />
-                ) : (
-                  user.phone
-                )}
-              </p>
-
+            No se encontraron usuarios
+          </p>
+        ) : (
+          filterUsers.map((user) => (
+            <div
+              key={user.id}
+              className={
+                theme === "light"
+                  ? "bg-white rounded-lg shadow-md p-6 text-gray-600 border-2 border-gray-600"
+                  : "bg-gray-800 rounded-lg shadow-md p-6 text-gray-300 border-2 border-gray-600"
+              }
+            >
               {editId === user.id ? (
-                <div className="flex gap-4 mt-4">
-                  <button
-                    onClick={() => {
-                      setUsers((prev) =>
-                        prev.map((u) =>
-                          u.id === user.id ? { ...u, ...editData } : u
-                        )
-                      );
-                      setEditId(null);
-                    }}
-                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded cursor-pointer"
-                  >
-                    Guardar
-                  </button>
-                  <button
-                    onClick={() => setEditId(null)}
-                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1 rounded cursor-pointer"
-                  >
-                    Cancelar
-                  </button>
-                </div>
+                <input
+                  type="text"
+                  value={editData.name}
+                  onChange={(e) =>
+                    setEditData({ ...editData, name: e.target.value })
+                  }
+                  className="text-xl font-semibold mb-3"
+                />
               ) : (
-                <div className="flex gap-4 mt-4">
-                  <button
-                    onClick={() => {
-                      setEditId(user.id);
-                      setEditData({
-                        name: user.name,
-                        email: user.email,
-                        phone: user.phone,
-                      });
-                    }}
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded cursor-pointer"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => {
-                      setUsers((prev) => prev.filter((u) => u.id !== user.id));
-                    }}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded cursor-pointer"
-                  >
-                    Eliminar
-                  </button>
-                </div>
+                <h2 className="text-xl font-semibold mb-3">{user.name}</h2>
               )}
+              <hr className={theme === "light" ? "p-2" : "p-2 text-gray-600"} />
+              <div className="flex flex-col gap-2">
+                <p>
+                  <span className="font-medium pr-2">Email:</span>
+                  {editId === user.id ? (
+                    <input
+                      type="email"
+                      value={editData.email}
+                      onChange={(e) =>
+                        setEditData({ ...editData, email: e.target.value })
+                      }
+                    />
+                  ) : (
+                    user.email
+                  )}
+                </p>
+
+                <p>
+                  <span className="font-medium pr-2">Teléfono:</span>
+                  {editId === user.id ? (
+                    <input
+                      type="phone"
+                      value={editData.phone}
+                      onChange={(e) =>
+                        setEditData({ ...editData, phone: e.target.value })
+                      }
+                    />
+                  ) : (
+                    user.phone
+                  )}
+                </p>
+
+                {editId === user.id ? (
+                  <div className="flex gap-4 mt-4">
+                    <button
+                      onClick={() => {
+                        setUsers((prev) =>
+                          prev.map((u) =>
+                            u.id === user.id ? { ...u, ...editData } : u
+                          )
+                        );
+                        setEditId(null);
+                      }}
+                      className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded cursor-pointer"
+                    >
+                      Guardar
+                    </button>
+                    <button
+                      onClick={() => setEditId(null)}
+                      className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1 rounded cursor-pointer"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-4 mt-4">
+                    <button
+                      onClick={() => {
+                        setEditId(user.id);
+                        setEditData({
+                          name: user.name,
+                          email: user.email,
+                          phone: user.phone,
+                        });
+                      }}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded cursor-pointer"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUsers((prev) =>
+                          prev.filter((u) => u.id !== user.id)
+                        );
+                      }}
+                      className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded cursor-pointer"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

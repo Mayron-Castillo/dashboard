@@ -11,7 +11,7 @@ function Home() {
       className={
         theme === "light"
           ? "flex flex-col justify-center items-center h-full"
-          : "flex flex-col justify-center items-center h-full bg-gray-800 text-white"
+          : "flex flex-col justify-center items-center h-full bg-gray-800 text-gray-300"
       }
     >
       {user ? (
