@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "../auth/ThemeContext";
+import { useAuth } from "../auth/AuthContext";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -9,6 +10,7 @@ function Users() {
   const [editData, setEditData] = useState({ name: "", email: "" });
   const [filter, setFilter] = useState("");
   const { theme } = useTheme();
+  const { user: token } = useAuth();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -84,8 +86,8 @@ function Users() {
           placeholder="Buscar usuario"
           className={
             theme === "light"
-              ? "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-black"
-              : "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-gray-300"
+              ? "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-gray-700 placeholder:text-gray-700"
+              : "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-gray-300 placeholder:text-gray-300"
           }
           value={filter}
           onChange={(e) => {
@@ -162,6 +164,21 @@ function Users() {
                     )}
                   </p>
 
+                  <p>
+                    <span className="font-medium pr-2">Token:</span>
+                    {editId === user.id ? (
+                      <input
+                        type="text"
+                        value={editData.token}
+                        onChange={(e) =>
+                          setEditData({ ...editData, token: e.target.value })
+                        }
+                      />
+                    ) : (
+                      token.token
+                    )}
+                  </p>
+
                   {editId === user.id ? (
                     <div className="flex gap-4 mt-4">
                       <button
@@ -193,6 +210,7 @@ function Users() {
                             name: user.name,
                             email: user.email,
                             phone: user.phone,
+                            token: token.token,
                           });
                         }}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded cursor-pointer"
