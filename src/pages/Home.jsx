@@ -8,16 +8,16 @@ function Home() {
   const { user } = useAuth();
   const { theme } = useTheme();
   return (
-    <div
-      className={
-        theme === "light"
-          ? "flex flex-col min-h-full w-full"
-          : "flex flex-col min-h-full w-full bg-gray-800 text-gray-300"
-      }
-    >
+    <div>
       {user ? (
-        <div>
-          <div className="mb-8 text-center">
+        <div
+          className={
+            theme === "light"
+              ? "flex flex-col min-h-full w-full"
+              : "flex flex-col min-h-full w-full bg-gray-800 text-gray-300"
+          }
+        >
+          <div className="mb-8 text-center mt-8">
             <h1 className="text-3xl font-bold">Hola, {user.name}!</h1>
             <p className="text-xl mt-2">
               Tu rol es: <span className="font-bold">{user.role}</span>
@@ -31,7 +31,7 @@ function Home() {
           </div>
         </div>
       ) : (
-        <div className="text-2xl flex flex-col gap-2 justify-center items-center h-full">
+        <div className="text-2xl flex flex-col gap-2 justify-center items-center min-h-screen">
           <h1>Bienvenido, debes iniciar sesión</h1>
           <Link
             to="/login"

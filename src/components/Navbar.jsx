@@ -17,7 +17,7 @@ function Navbar() {
           : "bg-gray-900 text-white p-3 shadow-md"
       }
     >
-      <div className="w-10/12 mx-auto flex justify-between items-center">
+      <div className="w-full flex justify-between items-center gap-4">
         <div className="flex gap-4">
           <Link
             to="/"
