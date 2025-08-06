@@ -84,8 +84,8 @@ function Users() {
           placeholder="Buscar usuario"
           className={
             theme === "light"
-              ? "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-gray-700 placeholder:text-gray-700"
-              : "border-2 border-gray-600 w-4/12 p-2 mb-2 flex justify-center items-center text-gray-300 placeholder:text-gray-300"
+              ? "border-2 border-gray-600 w-4/12 p-2 mb-5 flex justify-center items-center text-gray-700 placeholder:text-gray-700"
+              : "border-2 border-gray-600 w-4/12 p-2 mb-5 flex justify-center items-center text-gray-300 placeholder:text-gray-300"
           }
           value={filter}
           onChange={(e) => {

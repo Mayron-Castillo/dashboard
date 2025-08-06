@@ -17,15 +17,16 @@ function Home() {
     >
       {user ? (
         <div>
-          <div>
-            <h1 className="text-2xl">
-              Hola, bienvenido {user.name}, tu rol es {user.role}
-            </h1>
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-bold">Hola, {user.name}!</h1>
+            <p className="text-xl mt-2">
+              Tu rol es: <span className="font-bold">{user.role}</span>
+            </p>
           </div>
-          <h2 className="text-2xl text-center flex justify-center my-2">
+          <h2 className="text-2xl font-bold text-center my-6">
             Posts de Usuarios
           </h2>
-          <div className="">
+          <div>
             <Posts></Posts>
           </div>
         </div>

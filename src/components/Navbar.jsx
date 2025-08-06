@@ -38,13 +38,13 @@ function Navbar() {
         <div className="flex items-center gap-4">
           <button
             onClick={logout}
-            className="bg-red-500 hover:bg-red-600 px-4 py-1 rounded cursor-pointer font-bold"
+            className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded cursor-pointer font-bold"
           >
             Cerrar sesión
           </button>
           <button
             onClick={toggleTheme}
-            className="bg-blue-700 hover:bg-blue-800 px-4 py-1 rounded cursor-pointer font-bold"
+            className="bg-blue-700 hover:bg-blue-800 px-3 py-1 rounded cursor-pointer font-bold"
           >
             cambiar tema
           </button>
