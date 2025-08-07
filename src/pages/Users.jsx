@@ -123,7 +123,7 @@ function Users() {
                     onChange={(e) =>
                       setEditData({ ...editData, name: e.target.value })
                     }
-                    className="text-xl font-semibold mb-3"
+                    className="text-xl font-semibold mb-3 border border-gray-600"
                   />
                 ) : (
                   <h2 className="text-xl font-semibold mb-3">{user.name}</h2>
@@ -141,6 +141,7 @@ function Users() {
                         onChange={(e) =>
                           setEditData({ ...editData, email: e.target.value })
                         }
+                        className="border border-gray-600"
                       />
                     ) : (
                       user.email
@@ -156,6 +157,7 @@ function Users() {
                         onChange={(e) =>
                           setEditData({ ...editData, phone: e.target.value })
                         }
+                        className="border border-gray-600"
                       />
                     ) : (
                       user.phone

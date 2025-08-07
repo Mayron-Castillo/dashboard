@@ -4,6 +4,7 @@ import { useTheme } from "../auth/ThemeContext";
 function Posts() {
   const [userPosts, setUserPosts] = useState([]);
   const { theme } = useTheme();
+
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch(
@@ -14,6 +15,7 @@ function Posts() {
     };
     fetchPosts();
   }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {userPosts.map((post) => {
