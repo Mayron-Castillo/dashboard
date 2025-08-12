@@ -13,8 +13,8 @@ function Home() {
         <div
           className={
             theme === "light"
-              ? "flex flex-col min-h-full w-full"
-              : "flex flex-col min-h-full w-full bg-gray-800 text-gray-300"
+              ? "flex flex-col min-h-full w-full mt-10 md:mt-20"
+              : "flex flex-col min-h-full w-full bg-gray-800 text-gray-300 mt-10 md:mt-20"
           }
         >
           <div className="mb-8 text-center mt-8">

@@ -5,11 +5,19 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Users from "./pages/Users";
+import { useTheme } from "./auth/ThemeContext";
 function App() {
+  const { theme } = useTheme();
   return (
     <>
-      <div className="bg-gray-100 w-full h-full">
-        <Navbar></Navbar>
+      <Navbar></Navbar>
+      <div
+        className={
+          theme === "light"
+            ? "bg-gray-100 w-full h-full"
+            : "bg-gray-800 w-full h-full"
+        }
+      >
         <Routes>
           <Route path="/" element={<Home></Home>} />
           <Route path="/login" element={<Login></Login>} />
