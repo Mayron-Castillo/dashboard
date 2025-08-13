@@ -7,11 +7,9 @@ export function AuthProvider({ children }) {
 
   const login = async ({ username, password }) => {
     if (username === "admin" && password === "admin") {
-      setUser({ name: "Admin", role: "admin" });
-    } else if (username === "user" && password === "user") {
-      setUser({ name: "User", role: "user" });
+      setUser({ name: username, role: "admin" });
     } else {
-      throw new Error("Hubo un error");
+      setUser({ name: username, role: "user" });
     }
   };
 
