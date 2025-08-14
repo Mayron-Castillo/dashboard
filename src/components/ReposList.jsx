@@ -11,7 +11,7 @@ function ReposList() {
     const getRepos = async () => {
       try {
         const res = await fetch(
-          `https://api.github.com/users/${username}/repos`,
+          `https://api.github.com/users/${username}/repos?sort=updated`,
           {
             headers: {
               Authorization: `token ${token}`,

@@ -12,13 +12,11 @@ function Dash() {
 
       <div className="flex gap-4 mt-2">
         <div className="flex flex-col flex-1 gap-2">
-          <section className="bg-gray-200 rounded p-4">
-            <h2 className="text-2xl font-bold mb-2">Recent Projects</h2>
-          </section>
           <div className="bg-gray-200 rounded p-4">
             <h2 className="text-2xl font-bold">Skills</h2>
           </div>
           <div className="bg-gray-200 rounded p-4">
+            <h2 className="text-2xl font-bold mb-2 underline">Projects</h2>
             <ReposList></ReposList>
           </div>
         </div>
