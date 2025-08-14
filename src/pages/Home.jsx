@@ -3,6 +3,7 @@ import { useAuth } from "../auth/AuthContext";
 import { Link } from "react-router-dom";
 import { useTheme } from "../auth/ThemeContext";
 import Posts from "../components/Posts";
+import Dash from "../components/Dash";
 
 function Home() {
   const { user } = useAuth();
@@ -27,7 +28,8 @@ function Home() {
             Posts de Usuarios
           </h2>
           <div>
-            <Posts></Posts>
+            {/* <Posts></Posts> */}
+            <Dash></Dash>
           </div>
         </div>
       ) : (
