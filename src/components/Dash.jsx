@@ -1,4 +1,5 @@
 import React from "react";
+import ReposList from "./ReposList";
 
 function Dash() {
   return (
@@ -14,9 +15,11 @@ function Dash() {
           <section className="bg-gray-200 rounded p-4">
             <h2 className="text-2xl font-bold mb-2">Recent Projects</h2>
           </section>
-
           <div className="bg-gray-200 rounded p-4">
             <h2 className="text-2xl font-bold">Skills</h2>
+          </div>
+          <div className="bg-gray-200 rounded p-4">
+            <ReposList></ReposList>
           </div>
         </div>
 
