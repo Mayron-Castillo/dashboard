@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Users from "./pages/Users";
 import { useTheme } from "./auth/ThemeContext";
+
 function App() {
   const { theme } = useTheme();
   return (

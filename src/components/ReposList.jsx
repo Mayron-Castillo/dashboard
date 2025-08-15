@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "../auth/ThemeContext";
 const token = import.meta.env.VITE_GITHUB_TOKEN;
 const username = import.meta.env.VITE_GITHUB_USER;
 
 function ReposList() {
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const getRepos = async () => {
@@ -34,15 +36,28 @@ function ReposList() {
   if (!repos.length) return <p>Cargando...</p>;
 
   return (
-    <ul className="bg-gray-300 p-2 rounded">
+    <ul
+      className={
+        theme === "light"
+          ? "bg-gray-200 py-2 rounded"
+          : "bg-gray-700 py-2 rounded"
+      }
+    >
       {repos.map((repo) => (
-        <li key={repo.id} className="bg-gray-400 my-4 p-2 rounded">
+        <li
+          key={repo.id}
+          className={
+            theme === "light"
+              ? "bg-gray-300 my-4 p-2 rounded font-bold"
+              : "bg-gray-800 my-4 p-2 rounded font-bold"
+          }
+        >
           <p className="text-xl">{repo.name}</p>
           <a
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-700"
+            className="text-gray-500"
           >
             Ir al repositorio
           </a>
