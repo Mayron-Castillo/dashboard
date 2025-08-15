@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
+const token = import.meta.env.VITE_GITHUB_TOKEN;
+const username = import.meta.env.VITE_GITHUB_USER;
 
 function ReposList() {
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState(null);
-
-  const token = import.meta.env.VITE_GITHUB_TOKEN;
-  const username = import.meta.env.VITE_GITHUB_USER;
 
   useEffect(() => {
     const getRepos = async () => {
@@ -29,7 +28,7 @@ function ReposList() {
     };
 
     getRepos();
-  }, [username, token]);
+  }, []);
 
   if (error) return <p>Error: {error}</p>;
   if (!repos.length) return <p>Cargando...</p>;

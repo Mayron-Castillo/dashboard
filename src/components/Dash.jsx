@@ -1,5 +1,6 @@
 import React from "react";
 import ReposList from "./ReposList";
+import Profile from "./Profile";
 
 function Dash() {
   return (
@@ -21,10 +22,9 @@ function Dash() {
           </div>
         </div>
 
-        <aside className="w-1/4 bg-gray-200 rounded p-4 flex flex-col items-center h-[250px]">
-          <h1 className="text-xl font-bold">Hi, I'm Mayron</h1>
-          <p className="text-lg mb-4">React Developer</p>
-          <div className="w-full flex flex-col gap-2">
+        <aside className="w-1/4 bg-gray-200 rounded p-4 flex flex-col items-center h-[350px]">
+          <Profile></Profile>
+          <div className="w-full flex flex-col gap-2 mt-6">
             <a
               href="#"
               className="bg-gray-300 hover:bg-gray-400 rounded p-2 text-center"

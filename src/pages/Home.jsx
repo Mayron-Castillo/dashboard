@@ -2,7 +2,6 @@ import React from "react";
 import { useAuth } from "../auth/AuthContext";
 import { Link } from "react-router-dom";
 import { useTheme } from "../auth/ThemeContext";
-import Posts from "../components/Posts";
 import Dash from "../components/Dash";
 
 function Home() {
