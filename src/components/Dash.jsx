@@ -44,7 +44,7 @@ function Dash() {
                 : "bg-gray-700 rounded p-4"
             }
           >
-            <h2 className="text-2xl font-bold mb-2">Projects</h2>
+            <h2 className="text-2xl font-bold mb-2 ">Projects</h2>
             <ReposList></ReposList>
           </div>
         </div>
@@ -57,22 +57,6 @@ function Dash() {
           }
         >
           <Profile></Profile>
-          <div className="w-full flex flex-col gap-2 mt-6">
-            <a
-              href="https://www.linkedin.com/in/mayron-castillo/"
-              target="_blank"
-              className="bg-gray-300 hover:bg-gray-400 rounded p-2 text-center"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/Mayron-Castillo"
-              target="_blank"
-              className="bg-gray-300 hover:bg-gray-400 rounded p-2 text-center"
-            >
-              GitHub
-            </a>
-          </div>
         </aside>
       </div>
     </div>
