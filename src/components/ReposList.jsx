@@ -6,6 +6,7 @@ const username = import.meta.env.VITE_GITHUB_USER;
 function ReposList() {
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -26,14 +27,17 @@ function ReposList() {
         setRepos(data);
       } catch (err) {
         setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     getRepos();
   }, []);
 
+  if (loading) return <p>Cargando proyectos...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!repos.length) return <p>Cargando...</p>;
+  if (!repos) return null;
 
   return (
     <ul

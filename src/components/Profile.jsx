@@ -6,6 +6,7 @@ const token = import.meta.env.VITE_GITHUB_TOKEN;
 function Profile() {
   const [profile, setProfile] = useState({});
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -20,14 +21,16 @@ function Profile() {
         setProfile(data);
       } catch (err) {
         setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     getProfile();
   }, []);
-
+  if (loading) return <p>Cargando perfil...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (profile.length) return <p>Cargando...</p>;
+  if (!profile) return null;
 
   return (
     <div>

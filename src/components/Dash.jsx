@@ -2,6 +2,7 @@ import React from "react";
 import ReposList from "./ReposList";
 import Profile from "./Profile";
 import { useTheme } from "../auth/ThemeContext";
+import Weather from "./Weather";
 
 function Dash() {
   const { theme } = useTheme();
@@ -15,7 +16,7 @@ function Dash() {
     >
       {/* {theme === "light" ? :} */}
       <div className="flex gap-4 mt-2">
-        <div className="flex flex-col flex-1 gap-2">
+        <div className="flex flex-col flex-1 gap-4">
           <div
             className={
               theme === "light"
@@ -23,11 +24,20 @@ function Dash() {
                 : "bg-gray-700 rounded p-4"
             }
           >
-            <h2 className="text-2xl font-bold">Proyectos</h2>
+            <h2 className="text-2xl font-bold pb-4">Clima Palmares</h2>
+            <Weather></Weather>
+          </div>
+          <div
+            className={
+              theme === "light"
+                ? "bg-gray-200 rounded p-4"
+                : "bg-gray-700 rounded p-4"
+            }
+          >
+            <h2 className="text-2xl font-bold pt-4">Proyectos</h2>
             <ReposList></ReposList>
           </div>
         </div>
-
         <aside
           className={
             theme === "light"
