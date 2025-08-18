@@ -32,7 +32,7 @@ function Profile() {
   return (
     <div>
       {profile.name && (
-        <div className="flex flex-col gap-4 md:flex-row">
+        <div className="flex flex-col gap-4 lg:flex-row">
           <div className="flex justify-center items-center">
             <img
               src={profile.avatar_url}
@@ -83,7 +83,7 @@ function Profile() {
               </svg>
               <p className="mx-2">{profile.email}</p>
             </div>
-            <p>Account created: {profile.created_at.slice(0, 10)}</p>
+            <p>Cuenta creada en: {profile.created_at.slice(0, 10)}</p>
           </div>
         </div>
       )}

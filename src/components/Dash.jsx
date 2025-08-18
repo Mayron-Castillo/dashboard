@@ -14,18 +14,6 @@ function Dash() {
       }
     >
       {/* {theme === "light" ? :} */}
-      <nav
-        className={
-          theme === "light"
-            ? "flex gap-8 text-2xl font-bold bg-gray-200 rounded p-4"
-            : "flex gap-8 text-2xl font-bold bg-gray-700 rounded p-4"
-        }
-      >
-        <a href="#dashboard">Dashboard</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-      </nav>
-
       <div className="flex gap-4 mt-2">
         <div className="flex flex-col flex-1 gap-2">
           <div
@@ -35,16 +23,7 @@ function Dash() {
                 : "bg-gray-700 rounded p-4"
             }
           >
-            <h2 className="text-2xl font-bold">Skills</h2>
-          </div>
-          <div
-            className={
-              theme === "light"
-                ? "bg-gray-200 rounded p-4"
-                : "bg-gray-700 rounded p-4"
-            }
-          >
-            <h2 className="text-2xl font-bold mb-2 ">Projects</h2>
+            <h2 className="text-2xl font-bold">Proyectos</h2>
             <ReposList></ReposList>
           </div>
         </div>

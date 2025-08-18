@@ -18,14 +18,11 @@ function Home() {
           }
         >
           <div className="mb-8 text-center mt-8">
-            <h1 className="text-3xl font-bold">Hola, {user.name}!</h1>
+            <h1 className="text-3xl font-bold">Hola!</h1>
             <p className="text-xl mt-2">
               Tu rol es: <span className="font-bold">{user.role}</span>
             </p>
           </div>
-          <h2 className="text-2xl font-bold text-center my-6">
-            Posts de Usuarios
-          </h2>
           <div>
             {/* <Posts></Posts> */}
             <Dash></Dash>
