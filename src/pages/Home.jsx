@@ -24,7 +24,6 @@ function Home() {
             </p>
           </div>
           <div>
-            {/* <Posts></Posts> */}
             <Dash></Dash>
           </div>
         </div>

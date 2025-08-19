@@ -28,23 +28,13 @@ function Dash() {
             <div
               className={
                 theme === "light"
-                  ? "bg-gray-200 rounded"
-                  : "bg-gray-700 rounded"
+                  ? "bg-gray-200 rounded grid grid-cols-2 gap-4"
+                  : "bg-gray-700 rounded grid grid-cols-2 gap-4"
               }
             >
-              <h2 className="text-2xl font-bold pb-4">Clima Palmares</h2>
               <Weather></Weather>
+              <RecentCommits></RecentCommits>
             </div>
-          </div>
-          <div
-            className={
-              theme === "light"
-                ? "bg-gray-200 rounded p-4"
-                : "bg-gray-700 rounded p-4"
-            }
-          >
-            <h2 className="text-2xl font-bold pb-4">Últimos commits</h2>
-            <RecentCommits></RecentCommits>
           </div>
           <div
             className={

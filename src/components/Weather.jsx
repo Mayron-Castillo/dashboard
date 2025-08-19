@@ -37,7 +37,8 @@ function Weather() {
           : "bg-gray-800 p-4 rounded flex items-center justify-between"
       }
     >
-      <div>
+      <div className="w-full h-full">
+        <h1 className="text-2xl font-bold pb-4 underline">Clima Palmares</h1>
         <h2 className="text-lg font-semibold">
           {weather.location.name}, {weather.location.region},{" "}
           {weather.location.country}
@@ -45,12 +46,10 @@ function Weather() {
         <p className="text-sm text-gray-500 ">{weather.location.localtime}</p>
         <p className="text-2xl font-bold">{weather.current.temp_c}°C</p>
         <p className="text-sm">{weather.current.condition.text}</p>
-        <div className="mt-2 text-sm">
+        <div className="mt-4 flex flex-col gap-1">
           <p>💧 Humedad: {weather.current.humidity}%</p>
-          <p>
-            💨 Viento: {weather.current.wind_kph} km/h{" "}
-            {weather.current.wind_dir}
-          </p>
+          <p>💨 Viento: {weather.current.wind_kph} km/h </p>
+          <p>💨 Ráfagas: {weather.current.gust_kph} km/h</p>
           <p>🌧️ Precipitación: {weather.current.precip_mm} mm</p>
         </div>
       </div>
