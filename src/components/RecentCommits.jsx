@@ -28,7 +28,7 @@ function RecentActivity() {
 
         const recentCommits = data
           .filter((event) => event.type === "PushEvent")
-          .slice(0, 3);
+          .slice(0, 4);
 
         setCommits(recentCommits);
       } catch (err) {
@@ -49,11 +49,10 @@ function RecentActivity() {
     <div
       className={
         theme === "light"
-          ? "bg-gray-300 p-4 rounded"
-          : "bg-gray-800 p-4 rounded"
+          ? "bg-gray-300 p-4 rounded h-full"
+          : "bg-gray-800 p-4 rounded h-full"
       }
     >
-      <h1 className="text-2xl font-bold underline">Últimos commits</h1>
       <ul>
         {commits.map((event) =>
           event.payload.commits.map((commit) => (
@@ -61,8 +60,8 @@ function RecentActivity() {
               key={commit.sha}
               className={
                 theme === "light"
-                  ? "bg-gray-300 my-2 py-2 rounded font-bold"
-                  : "bg-gray-800 my-2 py-2 rounded"
+                  ? "bg-gray-300 py-1 rounded font-bold"
+                  : "bg-gray-800 py-1 rounded"
               }
             >
               <p className="font-semibold">{commit.message}</p>

@@ -32,8 +32,16 @@ function Dash() {
                   : "bg-gray-700 rounded grid grid-cols-2 gap-4"
               }
             >
-              <Weather></Weather>
-              <RecentCommits></RecentCommits>
+              <div className="flex flex-col">
+                <h3 className="text-2xl font-semibold mb-2">
+                  Clima de Palmares
+                </h3>
+                <Weather></Weather>
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-2xl font-semibold mb-2">Últimos Commits</h3>
+                <RecentCommits></RecentCommits>
+              </div>
             </div>
           </div>
           <div

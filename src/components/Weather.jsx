@@ -33,12 +33,11 @@ function Weather() {
     <div
       className={
         theme === "light"
-          ? "bg-gray-300 p-4 rounded flex items-center justify-between"
-          : "bg-gray-800 p-4 rounded flex items-center justify-between"
+          ? "bg-gray-300 p-4 rounded flex items-center justify-between h-full"
+          : "bg-gray-800 p-4 rounded flex items-center justify-between h-full"
       }
     >
       <div className="w-full h-full">
-        <h1 className="text-2xl font-bold pb-4 underline">Clima Palmares</h1>
         <h2 className="text-lg font-semibold">
           {weather.location.name}, {weather.location.region},{" "}
           {weather.location.country}
@@ -53,11 +52,13 @@ function Weather() {
           <p>🌧️ Precipitación: {weather.current.precip_mm} mm</p>
         </div>
       </div>
-      <img
-        src={weather.current.condition.icon}
-        alt={weather.current.condition.text}
-        className="w-16 h-16"
-      />
+      <div className="flex w-full h-full justify-end">
+        <img
+          src={weather.current.condition.icon}
+          alt={weather.current.condition.text}
+          className="w-20 h-20"
+        />
+      </div>
     </div>
   );
 }
