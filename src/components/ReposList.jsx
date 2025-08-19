@@ -43,8 +43,8 @@ function ReposList() {
     <ul
       className={
         theme === "light"
-          ? "bg-gray-200 py-2 rounded"
-          : "bg-gray-700 py-2 rounded"
+          ? "bg-gray-200 py-2 rounded grid grid-cols-3 gap-4"
+          : "bg-gray-700 py-2 rounded grid grid-cols-3 gap-4"
       }
     >
       {repos.map((repo) => (
@@ -52,8 +52,8 @@ function ReposList() {
           key={repo.id}
           className={
             theme === "light"
-              ? "bg-gray-300 my-4 p-2 rounded font-bold"
-              : "bg-gray-800 my-4 p-2 rounded font-bold"
+              ? "bg-gray-300 my-4 p-2 rounded font-bold flex flex-col items-center"
+              : "bg-gray-800 my-4 p-2 rounded font-bold flex flex-col items-center"
           }
         >
           <p className="text-xl">{repo.name}</p>
