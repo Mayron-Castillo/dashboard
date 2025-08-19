@@ -3,6 +3,7 @@ import ReposList from "./ReposList";
 import Profile from "./Profile";
 import { useTheme } from "../auth/ThemeContext";
 import Weather from "./Weather";
+import RecentCommits from "./RecentCommits";
 
 function Dash() {
   const { theme } = useTheme();
@@ -24,8 +25,26 @@ function Dash() {
                 : "bg-gray-700 rounded p-4"
             }
           >
-            <h2 className="text-2xl font-bold pb-4">Clima Palmares</h2>
-            <Weather></Weather>
+            <div
+              className={
+                theme === "light"
+                  ? "bg-gray-200 rounded"
+                  : "bg-gray-700 rounded"
+              }
+            >
+              <h2 className="text-2xl font-bold pb-4">Clima Palmares</h2>
+              <Weather></Weather>
+            </div>
+          </div>
+          <div
+            className={
+              theme === "light"
+                ? "bg-gray-200 rounded p-4"
+                : "bg-gray-700 rounded p-4"
+            }
+          >
+            <h2 className="text-2xl font-bold pb-4">Últimos commits</h2>
+            <RecentCommits></RecentCommits>
           </div>
           <div
             className={

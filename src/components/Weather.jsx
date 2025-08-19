@@ -33,8 +33,8 @@ function Weather() {
     <div
       className={
         theme === "light"
-          ? "bg-gray-300 p-4 rounded-2xl shadow-md flex items-center justify-between"
-          : "bg-gray-800 p-4 rounded-2xl shadow-md flex items-center justify-between"
+          ? "bg-gray-300 p-4 rounded flex items-center justify-between"
+          : "bg-gray-800 p-4 rounded flex items-center justify-between"
       }
     >
       <div>
