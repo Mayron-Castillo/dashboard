@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useTheme } from "../auth/ThemeContext";
 const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
 function Weather() {
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -28,15 +30,19 @@ function Weather() {
   if (!weather) return null;
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-md flex items-center justify-between">
+    <div
+      className={
+        theme === "light"
+          ? "bg-gray-300 p-4 rounded-2xl shadow-md flex items-center justify-between"
+          : "bg-gray-800 p-4 rounded-2xl shadow-md flex items-center justify-between"
+      }
+    >
       <div>
         <h2 className="text-lg font-semibold">
           {weather.location.name}, {weather.location.region},{" "}
           {weather.location.country}
         </h2>
-        <p className="text-sm text-gray-600 dark:text-gray-300">
-          {weather.location.localtime}
-        </p>
+        <p className="text-sm text-gray-500 ">{weather.location.localtime}</p>
         <p className="text-2xl font-bold">{weather.current.temp_c}°C</p>
         <p className="text-sm">{weather.current.condition.text}</p>
         <div className="mt-2 text-sm">
