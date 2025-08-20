@@ -90,6 +90,18 @@ function Profile() {
       )}
       <div className="w-full flex flex-col gap-2 mt-6">
         <a
+          href="/cv/MayronCV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${
+            theme === "light"
+              ? "bg-gray-300 hover:bg-gray-400"
+              : "bg-gray-800 hover:bg-gray-900"
+          } rounded p-2 text-center`}
+        >
+          Ver CV
+        </a>
+        <a
           href="https://www.linkedin.com/in/mayron-castillo/"
           target="_blank"
           className={`${

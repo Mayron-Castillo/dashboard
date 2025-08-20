@@ -51,6 +51,13 @@ function Dash() {
             theme === "light" ? "w-1/4 bg-gray-200" : "w-1/4 bg-gray-700"
           } w-1/4 rounded p-4 flex flex-col items-center h-auto`}
         >
+          <p
+            className={`${
+              theme === "light" ? "text-black" : "text-white"
+            } text-2xl font-bold pb-2`}
+          >
+            Frontend Developer
+          </p>
           <Profile></Profile>
         </aside>
       </div>
