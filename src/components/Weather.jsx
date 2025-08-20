@@ -35,11 +35,9 @@ function Weather() {
 
   return (
     <div
-      className={
-        theme === "light"
-          ? "bg-gray-300 p-4 rounded flex items-center justify-between h-full"
-          : "bg-gray-800 p-4 rounded flex items-center justify-between h-full"
-      }
+      className={`${
+        theme === "light" ? "bg-gray-300" : "bg-gray-800"
+      } p-4 rounded flex items-center justify-between h-full`}
     >
       <div className="w-full h-full">
         <h2 className="text-lg font-semibold">

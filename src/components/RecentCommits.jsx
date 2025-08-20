@@ -47,22 +47,18 @@ function RecentActivity() {
 
   return (
     <div
-      className={
-        theme === "light"
-          ? "bg-gray-300 p-4 rounded h-full"
-          : "bg-gray-800 p-4 rounded h-full"
-      }
+      className={`${
+        theme === "light" ? "bg-gray-300" : "bg-gray-800"
+      } p-4 rounded h-full`}
     >
       <ul>
         {commits.map((event) =>
           event.payload.commits.map((commit) => (
             <li
               key={commit.sha}
-              className={
-                theme === "light"
-                  ? "bg-gray-300 py-1 rounded font-bold"
-                  : "bg-gray-800 py-1 rounded"
-              }
+              className={`${
+                theme === "light" ? "bg-gray-300 font-bold" : "bg-gray-800"
+              } py-1 rounded`}
             >
               <p className="font-semibold">{commit.message}</p>
               <span className="text-sm text-gray-500">

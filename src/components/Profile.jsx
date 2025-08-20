@@ -48,11 +48,9 @@ function Profile() {
             <div>
               <h2 className="text-2xl font-bold">{profile.name}</h2>
               <p
-                className={
-                  theme === "light"
-                    ? "text-xl text-gray-600"
-                    : "text-xl text-gray-400"
-                }
+                className={`${
+                  theme === "light" ? "text-gray-600" : "text-gray-400"
+                } text-xl`}
               >
                 {profile.login}
               </p>
@@ -94,22 +92,22 @@ function Profile() {
         <a
           href="https://www.linkedin.com/in/mayron-castillo/"
           target="_blank"
-          className={
+          className={`${
             theme === "light"
-              ? "bg-gray-300 hover:bg-gray-400 rounded p-2 text-center"
-              : "bg-gray-800 hover:bg-gray-900 rounded p-2 text-center"
-          }
+              ? "bg-gray-300 hover:bg-gray-400"
+              : "bg-gray-800 hover:bg-gray-900"
+          } rounded p-2 text-center`}
         >
           LinkedIn
         </a>
         <a
           href="https://github.com/Mayron-Castillo"
           target="_blank"
-          className={
+          className={`${
             theme === "light"
-              ? "bg-gray-300 hover:bg-gray-400 rounded p-2 text-center"
-              : "bg-gray-800 hover:bg-gray-900 rounded p-2 text-center"
-          }
+              ? "bg-gray-300 hover:bg-gray-400"
+              : "bg-gray-800 hover:bg-gray-900"
+          } rounded p-2 text-center`}
         >
           GitHub
         </a>

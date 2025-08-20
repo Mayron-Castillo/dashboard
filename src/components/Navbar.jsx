@@ -35,7 +35,12 @@ function Navbar() {
           <div className="flex flex-col items-center gap-4 w-full md:flex-row md:justify-start">
             <Link
               to="/"
-              className="bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded font-bold w-40 text-center"
+              className={`${
+                theme === "light"
+                  ? "bg-blue-700 hover:bg-blue-800"
+                  : "bg-blue-900 hover:bg-blue-950"
+              }
+                " px-3 py-2 rounded font-bold w-40 text-center"`}
               onClick={() => setIsOpen(false)}
             >
               Inicio
@@ -43,7 +48,12 @@ function Navbar() {
             {user.role === "admin" && (
               <Link
                 to="/users"
-                className="bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded font-bold w-40 text-center"
+                className={`${
+                  theme === "light"
+                    ? "bg-blue-700 hover:bg-blue-800"
+                    : "bg-blue-900 hover:bg-blue-950"
+                }
+                  " px-3 py-2 rounded font-bold w-40 text-center"`}
                 onClick={() => setIsOpen(false)}
               >
                 Usuarios
@@ -51,13 +61,18 @@ function Navbar() {
             )}
           </div>
 
-          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <button
               onClick={() => {
                 toggleTheme();
                 setIsOpen(false);
               }}
-              className="bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded cursor-pointer font-bold w-40 text-center"
+              className={`${
+                theme === "light"
+                  ? "bg-blue-700 hover:bg-blue-800 cursor-pointer"
+                  : "bg-blue-900 hover:bg-blue-950 cursor-pointer"
+              }
+                " px-3 py-2 rounded font-bold w-40 text-center"`}
             >
               {theme === "light" ? "Oscuro" : "Claro"}
             </button>

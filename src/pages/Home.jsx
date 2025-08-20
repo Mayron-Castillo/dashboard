@@ -11,11 +11,9 @@ function Home() {
     <div>
       {user ? (
         <div
-          className={
-            theme === "light"
-              ? "flex flex-col min-h-full w-full mt-10 md:mt-20"
-              : "flex flex-col min-h-full w-full bg-gray-800 text-gray-300 mt-10 md:mt-20"
-          }
+          className={`${
+            theme === "light" ? "bg-gray-100" : "bg-gray-800 text-gray-300"
+          } flex flex-col min-h-full w-full mt-10 md:mt-20`}
         >
           <div className="mb-8 text-center mt-8">
             <h1 className="text-3xl font-bold">Hola!</h1>

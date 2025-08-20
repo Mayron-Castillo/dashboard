@@ -13,11 +13,9 @@ function App() {
     <>
       <Navbar></Navbar>
       <div
-        className={
-          theme === "light"
-            ? "bg-gray-100 w-full h-full"
-            : "bg-gray-800 w-full h-full"
-        }
+        className={`${
+          theme === "light" ? "bg-gray-100" : "bg-gray-800"
+        } w-full h-full`}
       >
         <Routes>
           <Route path="/" element={<Home></Home>} />

@@ -34,11 +34,9 @@ function Users() {
   if (loading)
     return (
       <p
-        className={
-          theme === "light"
-            ? "bg-white min-h-screen"
-            : "bg-gray-800 min-h-screen"
-        }
+        className={`${
+          theme === "light" ? "bg-white" : "bg-gray-800"
+        } min-h-screen`}
       >
         Cargando...
       </p>
@@ -46,11 +44,9 @@ function Users() {
   if (error)
     return (
       <p
-        className={
-          theme === "light"
-            ? "bg-white min-h-screen"
-            : "bg-gray-800 min-h-screen"
-        }
+        className={`${
+          theme === "light" ? "bg-white" : "bg-gray-800"
+        } min-h-screen`}
       >
         {error.message}
       </p>
@@ -62,18 +58,14 @@ function Users() {
 
   return (
     <div
-      className={
-        theme === "light"
-          ? "min-h-screen bg-gray-100 p-6"
-          : "min-h-screen bg-gray-800 p-6"
-      }
+      className={`${
+        theme === "light" ? "bg-gray-100" : "bg-gray-800"
+      } min-h-screen p-6`}
     >
       <h1
-        className={
-          theme === "light"
-            ? "text-3xl font-bold text-center text-gray-700 mb-8"
-            : "text-3xl font-bold text-center text-gray-300 mb-8"
-        }
+        className={`${
+          theme === "light" ? "text-gray-700" : "text-gray-300"
+        } text-3xl font-bold text-center mb-8`}
       >
         Usuarios
       </h1>
@@ -82,11 +74,11 @@ function Users() {
         <input
           type="text"
           placeholder="Buscar usuario"
-          className={
+          className={`${
             theme === "light"
-              ? "border-2 border-gray-600 w-4/12 p-2 mb-5 flex justify-center items-center text-gray-700 placeholder:text-gray-700"
-              : "border-2 border-gray-600 w-4/12 p-2 mb-5 flex justify-center items-center text-gray-300 placeholder:text-gray-300"
-          }
+              ? "text-gray-700 placeholder:text-gray-700"
+              : "text-gray-300 placeholder:text-gray-300"
+          } border-2 border-gray-600 w-4/12 p-2 mb-5 flex justify-center items-center`}
           value={filter}
           onChange={(e) => {
             setFilter(e.target.value);
@@ -97,11 +89,9 @@ function Users() {
       <div className="min-h-screen">
         {filterUsers.length === 0 ? (
           <p
-            className={
-              theme === "light"
-                ? "text-black text-center text-2xl mt-4"
-                : "text-gray-400 text-center text-2xl mt-4"
-            }
+            className={`${
+              theme === "light" ? "text-black" : "text-gray-400"
+            } text-center text-2xl mt-4`}
           >
             No se encontraron usuarios
           </p>
@@ -110,11 +100,11 @@ function Users() {
             {filterUsers.map((user) => (
               <div
                 key={user.id}
-                className={
+                className={`${
                   theme === "light"
-                    ? "bg-white rounded-lg shadow-md p-6 text-gray-600 border-2 border-gray-600"
-                    : "bg-gray-800 rounded-lg shadow-md p-6 text-gray-300 border-2 border-gray-600"
-                }
+                    ? "bg-white text-gray-600"
+                    : "bg-gray-800 text-gray-300"
+                } rounded-lg p-6 border-2 border-gray-600`}
               >
                 {editId === user.id ? (
                   <input
