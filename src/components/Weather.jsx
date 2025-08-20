@@ -12,10 +12,14 @@ function Weather() {
     const fetchWeather = async () => {
       try {
         const response = await fetch(
-          `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Palmares,Alajuela,Costa Rica&lang=es`
+          `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Costa%20Rica&lang=es`
         );
         const data = await response.json();
-        setWeather(data);
+        if (data.error) {
+          setError(data.error.message);
+        } else {
+          setWeather(data);
+        }
       } catch (error) {
         setError(error.message);
       } finally {
@@ -39,7 +43,7 @@ function Weather() {
     >
       <div className="w-full h-full">
         <h2 className="text-lg font-semibold">
-          {weather.location.name}, {weather.location.region},{" "}
+          {weather.location.name}, {weather.location.region},
           {weather.location.country}
         </h2>
         <p className="text-sm text-gray-500 ">{weather.location.localtime}</p>

@@ -34,7 +34,7 @@ function Dash() {
             >
               <div className="flex flex-col">
                 <h3 className="text-2xl font-semibold mb-2">
-                  Clima de Palmares
+                  Clima de Costa Rica
                 </h3>
                 <Weather></Weather>
               </div>
