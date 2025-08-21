@@ -27,7 +27,9 @@ function Home() {
         </div>
       ) : (
         <div className="text-2xl flex flex-col gap-2 justify-center items-center min-h-screen">
-          <h1>Bienvenido, debes iniciar sesión</h1>
+          <h1 className={theme === "light" ? "text-black" : "text-white"}>
+            Bienvenido, debes iniciar sesión
+          </h1>
           <Link
             to="/login"
             className="bg-blue-600 p-2 text-center rounded text-white hover:bg-blue-700"

@@ -17,11 +17,11 @@ Dashboard desarrollado con React que incluye autenticación, gestión de usuario
   - Navegación intuitiva
 
 - **Módulos Principales**
-  - Panel de inicio con resumen
-  - Gestión de usuarios
+  - Gestión de usuarios(admin)
   - Visualización de repositorios de GitHub
   - Clima actual
-  - Actividad reciente
+  - Últimos commits
+  - Perfil de Github
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -36,7 +36,7 @@ Dashboard desarrollado con React que incluye autenticación, gestión de usuario
 - **APIs Externas**
 
   - GitHub API (repositorios y commits)
-  - OpenWeatherMap (datos del clima)
+  - Weatherapi (datos del clima de Costa Rica)
 
 - **Herramientas de Desarrollo**
   - Vite
@@ -77,7 +77,7 @@ Dashboard desarrollado con React que incluye autenticación, gestión de usuario
    http://localhost:5173
    ```
 
-## 🔒 Credenciales de Acceso
+## 🔒Acceso
 
 - **Admin:**
 
@@ -91,7 +91,3 @@ Dashboard desarrollado con React que incluye autenticación, gestión de usuario
 ## 👨‍💻 Autor
 
 **Mayron Castillo** - Desarrollador Frontend
-
-- GitHub: [Mayron-Castillo](https://github.com/Mayron-Castillo)
-- LinkedIn: [mayron-castillo](https://www.linkedin.com/in/mayron-castillo/)
-- Portfolio: [portfolio-mayron.vercel.app](https://portfolio-mayron.vercel.app/)
