@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./auth/Login";
 import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
+import Navbar from "./layout/Navbar";
 import Users from "./pages/Users";
 import { useTheme } from "./auth/ThemeContext";
 

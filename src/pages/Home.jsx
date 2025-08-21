@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../auth/AuthContext";
 import { Link } from "react-router-dom";
 import { useTheme } from "../auth/ThemeContext";
-import Dash from "../components/Dash";
+import MainLayout from "../layout/MainLayout";
 
 function Home() {
   const { user } = useAuth();
@@ -22,7 +22,7 @@ function Home() {
             </p>
           </div>
           <div>
-            <Dash></Dash>
+            <MainLayout />
           </div>
         </div>
       ) : (

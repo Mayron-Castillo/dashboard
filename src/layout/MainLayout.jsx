@@ -1,11 +1,11 @@
 import React from "react";
-import ReposList from "./ReposList";
-import Profile from "./Profile";
+import ReposList from "../components/ReposList";
+import Profile from "../components/Profile";
 import { useTheme } from "../auth/ThemeContext";
-import Weather from "./Weather";
-import RecentCommits from "./RecentCommits";
+import Weather from "../components/Weather";
+import RecentCommits from "../components/RecentCommits";
 
-function Dash() {
+function MainLayout() {
   const { theme } = useTheme();
   return (
     <div
@@ -65,4 +65,4 @@ function Dash() {
   );
 }
 
-export default Dash;
+export default MainLayout;
