@@ -9,6 +9,7 @@ function Home() {
   const { theme } = useTheme();
   return (
     <div>
+      {/* Si se loguea y se encuentra que si hay un usuario muestra el MainLayout */}
       {user ? (
         <div
           className={`${
@@ -26,6 +27,7 @@ function Home() {
           </div>
         </div>
       ) : (
+        // Esto es lo que se va a mostrar primeramente al ejecutar el programa
         <div className="text-2xl flex flex-col gap-2 justify-center items-center min-h-screen">
           <h1 className={theme === "light" ? "text-black" : "text-white"}>
             Bienvenido, debes iniciar sesión

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "../auth/ThemeContext";
 
-const token = import.meta.env.VITE_GITHUB_TOKEN;
 const username = import.meta.env.VITE_GITHUB_USER;
 
 function RecentActivity() {
@@ -10,22 +9,19 @@ function RecentActivity() {
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
 
+  // Se llama a la API de github en la que se trae los eventos de mi usuario
   useEffect(() => {
     const getActivity = async () => {
       try {
         const res = await fetch(
-          `https://api.github.com/users/${username}/events`,
-          {
-            headers: {
-              Authorization: `token ${token}`,
-            },
-          }
+          `https://api.github.com/users/${username}/events`
         );
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const data = await res.json();
 
+        // Se filtran los eventos, type son PushEvent, y con el slice se acceden a los últimos 4 commits
         const recentCommits = data
           .filter((event) => event.type === "PushEvent")
           .slice(0, 4);
@@ -40,7 +36,7 @@ function RecentActivity() {
 
     getActivity();
   }, []);
-
+  // Validaciones de renderizado, para evitar errores
   if (loading) return <p>Cargando actividad reciente...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!commits.length) return <p>No hay actividad reciente.</p>;
@@ -52,6 +48,7 @@ function RecentActivity() {
       } p-4 rounded h-full`}
     >
       <ul>
+        {/* Se hace un .map de  los eventos, al paylad.commits se accede a los commits */}
         {commits.map((event) =>
           event.payload.commits.map((commit) => (
             <li

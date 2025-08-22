@@ -29,17 +29,18 @@ function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-gray-200 rounded-2xl shadow-xl overflow-hidden p-8">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Iniciar Sesión</h1>
         </div>
-
+        {/* Si hay un error en la llamada se ejecuta y se muestra el error */}
         {error && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
             {error}
           </div>
         )}
 
+        {/* Formulario del login*/}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label
@@ -48,6 +49,7 @@ function Login() {
             >
               Usuario
             </label>
+            {/* El input debe ser requerido y minimo de 2 caracteres si no da error */}
             <input
               {...register("username", {
                 required: "El usuario es requerido",
@@ -59,8 +61,10 @@ function Login() {
               })}
               className="w-full px-4 py-3 rounded-lg border border-gray-300"
               placeholder="Ingresa tu usuario"
+              // Al hacer clic en iniciar sesión se deshabilita escribir en el input
               disabled={isLoading}
             />
+            {/* Si hay error lo captura y lo muestra debajo del input con texto en rojo */}
             {errors.username && (
               <p className="mt-1 text-sm text-red-600">
                 {errors.username.message}
@@ -75,6 +79,7 @@ function Login() {
             >
               Contraseña
             </label>
+            {/* La contraseña debe ser requerido y minimo de 5 caracteres si no da error */}
             <input
               {...register("password", {
                 required: "La contraseña es requerida",
@@ -85,8 +90,10 @@ function Login() {
               })}
               className="w-full px-4 py-3 rounded-lg border border-gray-300"
               placeholder="Ingresa tu contraseña"
+              // Al hacer clic en iniciar sesión se deshabilita escribir en la contraseña
               disabled={isLoading}
             />
+            {/* Si hay error lo captura y lo muestra debajo de la contraseña con texto en rojo */}
             {errors.password && (
               <p className="mt-1 text-sm text-red-600">
                 {errors.password.message}
@@ -94,8 +101,10 @@ function Login() {
             )}
           </div>
 
+          {/* Botón para enviar el formulario */}
           <button
             type="submit"
+            // Si se da a enviar se desactiva el botón al momento, si hay error se vuelve a habilitar
             disabled={isLoading}
             className={`w-full text-white py-3 px-4 rounded-lg cursor-pointer ${
               isLoading

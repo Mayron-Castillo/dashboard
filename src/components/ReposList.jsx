@@ -9,6 +9,8 @@ function ReposList() {
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
 
+  // Llamo a la API para acceder a los repositorios
+  // El token en si no es necesario, pero lo uso por si llegara a necesitar acceder a un repositorio privado
   useEffect(() => {
     const getRepos = async () => {
       try {
@@ -35,6 +37,7 @@ function ReposList() {
     getRepos();
   }, []);
 
+  // Validaciones de renderizado, para evitar errores
   if (loading) return <p>Cargando proyectos...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!repos) return null;
@@ -45,6 +48,7 @@ function ReposList() {
         theme === "light" ? "bg-gray-200" : "bg-gray-700"
       } py-2 rounded grid grid-cols-3 gap-4`}
     >
+      {/* Se muestran todos los repositorios con .map, se muestra el nombre y la url al repositorio */}
       {repos.map((repo) => (
         <li
           key={repo.id}

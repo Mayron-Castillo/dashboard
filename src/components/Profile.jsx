@@ -9,6 +9,8 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
 
+  // Se llama a la API de github para acceder a mi Usuario
+  // Se utiliza el token para acceder a información que no se puede acceder, como el email
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -28,12 +30,15 @@ function Profile() {
 
     getProfile();
   }, []);
+
+  // Validaciones de renderizado, para evitar errores
   if (loading) return <p>Cargando perfil...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!profile) return null;
 
   return (
     <div>
+      {/* Se muestran los datos del perfil, los que se llaman de la API y otros puestos directamente */}
       {profile.name && (
         <div className="flex flex-col gap-4 lg:flex-row">
           <div className="flex justify-center items-center">

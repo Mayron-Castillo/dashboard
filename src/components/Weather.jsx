@@ -8,6 +8,7 @@ function Weather() {
   const [error, setError] = useState(null);
   const { theme } = useTheme();
 
+  // Llamada a la API de weatherapi especificamente la llamada a Costa Rica
   useEffect(() => {
     const fetchWeather = async () => {
       try {
@@ -15,6 +16,7 @@ function Weather() {
           `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=Costa%20Rica&lang=es`
         );
         const data = await response.json();
+        // If para evitar si hay un error con el clima de que no se encuentra la ubicación
         if (data.error) {
           setError(data.error.message);
         } else {
@@ -29,6 +31,8 @@ function Weather() {
 
     fetchWeather();
   }, []);
+
+  // Validaciones de renderizado, para evitar errores
   if (loading) return <p>Cargando clima...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!weather) return null;

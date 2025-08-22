@@ -10,6 +10,7 @@ function Users() {
   const [filter, setFilter] = useState("");
   const { theme } = useTheme();
 
+  // Llamada a la API de jsonplaceholder, para simular usuarios en el apartado de usuarios
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -31,6 +32,7 @@ function Users() {
     fetchUsers();
   }, []);
 
+  // Validaciones por si se tarda en cargar y por si hay un error
   if (loading)
     return (
       <p
@@ -52,6 +54,7 @@ function Users() {
       </p>
     );
 
+  // Filtro para buscar a los usuarios en el input
   const filterUsers = users.filter((user) => {
     return user.name.toLowerCase().includes(filter.toLowerCase());
   });
@@ -70,7 +73,8 @@ function Users() {
         Usuarios
       </h1>
 
-      <div className="w-full flex justify-center ">
+      <div className="w-full flex justify-center">
+        {/* Input para buscar a los usuarios */}
         <input
           type="text"
           placeholder="Buscar usuario"
@@ -87,6 +91,7 @@ function Users() {
       </div>
 
       <div className="min-h-screen">
+        {/* Se hace la validación de que si no se encontraron usuarios al filtrar por nombre muestre el mensaje */}
         {filterUsers.length === 0 ? (
           <p
             className={`${
@@ -106,6 +111,7 @@ function Users() {
                     : "bg-gray-800 text-gray-300"
                 } rounded-lg p-6 border-2 border-gray-600`}
               >
+                {/* Esto se muestra cuando se le da click a los botones de editar */}
                 {editId === user.id ? (
                   <input
                     type="text"
@@ -124,6 +130,7 @@ function Users() {
                 <div className="flex flex-col gap-2">
                   <p>
                     <span className="font-medium pr-2">Email:</span>
+                    {/* Esto se muestra cuando se le da click a los botones de editar */}
                     {editId === user.id ? (
                       <input
                         type="email"
@@ -140,6 +147,7 @@ function Users() {
 
                   <p>
                     <span className="font-medium pr-2">Teléfono:</span>
+                    {/* Esto se muestra cuando se le da click a los botones de editar */}
                     {editId === user.id ? (
                       <input
                         type="phone"
@@ -154,15 +162,19 @@ function Users() {
                     )}
                   </p>
 
+                  {/* Cuando está en la parte de editar se muestran estos dos botones, uno de Guardar y otro de Cancelar */}
                   {editId === user.id ? (
                     <div className="flex gap-4 mt-4">
                       <button
+                        // Este onclick actualiza el estado y guarda los datos que se pusieron nuevos
+                        // El .map si el id coincide con el que se editó, se crea el nuevo objeto editado
                         onClick={() => {
                           setUsers((prev) =>
                             prev.map((u) =>
                               u.id === user.id ? { ...u, ...editData } : u
                             )
                           );
+                          //Al dar clic en guardar, se oculta la parte de editar y se vuelve al normal
                           setEditId(null);
                         }}
                         className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded cursor-pointer"
@@ -177,10 +189,13 @@ function Users() {
                       </button>
                     </div>
                   ) : (
+                    // Cuando no se está en la parte de editar, sino en la normal, se muestran estos dos botones
                     <div className="flex gap-4 mt-4">
                       <button
                         onClick={() => {
+                          //setEditId sirve para controlar el usuario que se está actualizando
                           setEditId(user.id);
+                          //setEditData obtiene los datos que se cambiaron y los actualiza si el usuario lo guarda
                           setEditData({
                             name: user.name,
                             email: user.email,

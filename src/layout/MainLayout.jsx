@@ -7,6 +7,7 @@ import RecentCommits from "../components/RecentCommits";
 
 function MainLayout() {
   const { theme } = useTheme();
+  // Este componente muestra todo lo que se ve en la parte del inicio
   return (
     <div
       className={`${
@@ -25,18 +26,21 @@ function MainLayout() {
                 theme === "light" ? "bg-gray-200" : "bg-gray-700"
               } rounded grid grid-cols-2 gap-4`}
             >
+              {/* Aqui se muestra la parte del Clima, se trae el componente weather */}
               <div className="flex flex-col">
                 <h3 className="text-2xl font-semibold mb-2">
                   Clima de Costa Rica
                 </h3>
                 <Weather></Weather>
               </div>
+              {/* Aqui se muestran los últimos commits, se llama al componente de commits recientes */}
               <div className="flex flex-col">
                 <h3 className="text-2xl font-semibold mb-2">Últimos Commits</h3>
                 <RecentCommits></RecentCommits>
               </div>
             </div>
           </div>
+          {/* Aqui se muestra el componente de Repositorios */}
           <div
             className={`${
               theme === "light" ? "bg-gray-200" : "bg-gray-700"
@@ -46,6 +50,8 @@ function MainLayout() {
             <ReposList></ReposList>
           </div>
         </div>
+
+        {/* En este aside es para mostrar el perfil, llamando al componete profile */}
         <aside
           className={`${
             theme === "light" ? "w-1/4 bg-gray-200" : "w-1/4 bg-gray-700"
