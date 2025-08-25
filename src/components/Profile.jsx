@@ -40,8 +40,8 @@ function Profile() {
     <div>
       {/* Se muestran los datos del perfil, los que se llaman de la API y otros puestos directamente */}
       {profile.name && (
-        <div className="flex flex-col gap-4 lg:flex-row">
-          <div className="flex justify-center items-center">
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-center">
             <img
               src={profile.avatar_url}
               alt="image avatar"

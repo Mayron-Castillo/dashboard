@@ -43,31 +43,30 @@ function ReposList() {
   if (!repos) return null;
 
   return (
-    <ul
-      className={`${
-        theme === "light" ? "bg-gray-200" : "bg-gray-700"
-      } py-2 rounded grid grid-cols-3 gap-4`}
-    >
-      {/* Se muestran todos los repositorios con .map, se muestra el nombre y la url al repositorio */}
-      {repos.map((repo) => (
-        <li
-          key={repo.id}
-          className={`${
-            theme === "light" ? "bg-gray-300" : "bg-gray-800"
-          } my-4 p-2 rounded font-bold flex flex-col items-center`}
-        >
-          <p className="text-xl">{repo.name}</p>
-          <a
-            href={repo.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-500"
+    <div className="w-full px-2 sm:px-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {repos.map((repo) => (
+          <li
+            key={repo.id}
+            className={`${
+              theme === "light" ? "bg-gray-300" : "bg-gray-800"
+            } p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200`}
           >
-            Ir al repositorio
-          </a>
-        </li>
-      ))}
-    </ul>
+            <p className="text-lg sm:text-xl font-semibold text-center mb-3 break-words">
+              {repo.name}
+            </p>
+            <a
+              href={repo.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+            >
+              Ir al repositorio
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

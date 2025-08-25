@@ -14,17 +14,17 @@ function MainLayout() {
         theme === "light" ? "bg-gray-300 text-black" : " bg-gray-900 text-white"
       } w-11/12 mx-auto flex flex-col rounded-lg h-auto p-4`}
     >
-      <div className="flex gap-4 mt-2">
-        <div className="flex flex-col flex-1 gap-4">
+      <div className="flex flex-col lg:flex-row gap-4 mt-2">
+        <div className="flex flex-col flex-1 gap-4 w-full lg:w-auto">
           <div
             className={`${
               theme === "light" ? "bg-gray-200" : "bg-gray-700"
-            } rounded p-4`}
+            } rounded p-2 sm:p-4`}
           >
             <div
               className={`${
                 theme === "light" ? "bg-gray-200" : "bg-gray-700"
-              } rounded grid grid-cols-2 gap-4`}
+              } rounded grid grid-cols-1 md:grid-cols-2 gap-4`}
             >
               {/* Aqui se muestra la parte del Clima, se trae el componente weather */}
               <div className="flex flex-col">
@@ -44,9 +44,9 @@ function MainLayout() {
           <div
             className={`${
               theme === "light" ? "bg-gray-200" : "bg-gray-700"
-            } rounded p-4`}
+            } rounded p-2 sm:p-4`}
           >
-            <h2 className="text-2xl font-bold pt-4">Proyectos</h2>
+            <h2 className="text-xl sm:text-2xl font-bold pt-2 sm:pt-4">Proyectos</h2>
             <ReposList></ReposList>
           </div>
         </div>
@@ -54,8 +54,8 @@ function MainLayout() {
         {/* En este aside es para mostrar el perfil, llamando al componete profile */}
         <aside
           className={`${
-            theme === "light" ? "w-1/4 bg-gray-200" : "w-1/4 bg-gray-700"
-          } w-1/4 rounded p-4 flex flex-col items-center h-auto`}
+            theme === "light" ? "bg-gray-200" : "bg-gray-700"
+          } w-full lg:w-1/4 rounded p-4 flex flex-col items-center h-auto`}
         >
           <p
             className={`${
