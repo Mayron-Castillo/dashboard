@@ -8,9 +8,12 @@ function Users() {
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({ name: "", email: "" });
   const [filter, setFilter] = useState("");
+  const [newUser, setNewUser] = useState({ name: "", email: "", phone: "" });
+  const [addForm, setAddForm] = useState(false);
+  const [formError, setFormError] = useState("");
   const { theme } = useTheme();
 
-  // Llamada a la API de jsonplaceholder, para simular usuarios en el apartado de usuarios
+  // Llamada a la API de jsonplaceholder
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -59,6 +62,19 @@ function Users() {
     return user.name.toLowerCase().includes(filter.toLowerCase());
   });
 
+  // Crear nuevo usuario
+  const handleAddUser = () => {
+    if (!newUser.name || !newUser.email || !newUser.phone) {
+      setFormError("Por favor complete todos los campos requeridos");
+      return false;
+    }
+
+    setUsers([...users, { ...newUser, id: Date.now() }]);
+    setNewUser({ name: "", email: "", phone: "" });
+    setFormError("");
+    return true;
+  };
+
   return (
     <div
       className={`${
@@ -72,6 +88,106 @@ function Users() {
       >
         Usuarios
       </h1>
+
+      {/* Botón para mostrar formulario */}
+      {!addForm && (
+        <div className="w-full flex justify-center mb-8">
+          <button
+            onClick={() => setAddForm(true)}
+            className="px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer bg-green-500 hover:bg-green-600 text-white"
+          >
+            Agregar nuevo usuario
+          </button>
+        </div>
+      )}
+
+      {/* Formulario para crear nuevo usuario */}
+      {addForm && (
+        <div className="w-full max-w-2xl mx-auto mb-8">
+          <div
+            className={`${
+              theme === "light"
+                ? "bg-white text-gray-600"
+                : "bg-gray-800 text-gray-300"
+            } rounded-lg p-6 border-2 border-gray-600`}
+          >
+            <h2 className="text-2xl font-semibold mb-4 text-center">
+              Nuevo Usuario
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <input
+                  type="text"
+                  value={newUser.name}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, name: e.target.value })
+                  }
+                  className={`w-full p-2 border-2 ${
+                    theme === "light"
+                      ? "border-gray-600 bg-white"
+                      : "border-gray-600 bg-gray-700"
+                  } rounded`}
+                  placeholder="Nombre"
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  value={newUser.email}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, email: e.target.value })
+                  }
+                  className={`w-full p-2 border-2 ${
+                    theme === "light"
+                      ? "border-gray-600 bg-white"
+                      : "border-gray-600 bg-gray-700"
+                  } rounded`}
+                  placeholder="Tu correo"
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  value={newUser.phone}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, phone: e.target.value })
+                  }
+                  className={`w-full p-2 border-2 ${
+                    theme === "light"
+                      ? "border-gray-600 bg-white"
+                      : "border-gray-600 bg-gray-700"
+                  } rounded`}
+                  placeholder="Teléfono"
+                />
+              </div>
+              {formError && (
+                <div className="mt-2 p-2 bg-red-100 border border-red-400 text-red-700 rounded text-center">
+                  {formError}
+                </div>
+              )}
+            </div>
+            <div className="flex justify-center gap-4 mt-6">
+              <button
+                onClick={() => {
+                  const success = handleAddUser();
+                  if (success) {
+                    setAddForm(false);
+                  }
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-medium cursor-pointer transition-colors"
+              >
+                Crear Usuario
+              </button>
+              <button
+                onClick={() => setAddForm(false)}
+                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded font-medium cursor-pointer transition-colors"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="w-full flex justify-center">
         {/* Input para buscar a los usuarios */}
@@ -91,7 +207,6 @@ function Users() {
       </div>
 
       <div className="min-h-screen">
-        {/* Se hace la validación de que si no se encontraron usuarios al filtrar por nombre muestre el mensaje */}
         {filterUsers.length === 0 ? (
           <p
             className={`${
@@ -111,7 +226,6 @@ function Users() {
                     : "bg-gray-800 text-gray-300"
                 } rounded-lg p-6 border-2 border-gray-600`}
               >
-                {/* Esto se muestra cuando se le da click a los botones de editar */}
                 {editId === user.id ? (
                   <input
                     type="text"
@@ -130,7 +244,6 @@ function Users() {
                 <div className="flex flex-col gap-2">
                   <p>
                     <span className="font-medium pr-2">Email:</span>
-                    {/* Esto se muestra cuando se le da click a los botones de editar */}
                     {editId === user.id ? (
                       <input
                         type="email"
@@ -147,7 +260,6 @@ function Users() {
 
                   <p>
                     <span className="font-medium pr-2">Teléfono:</span>
-                    {/* Esto se muestra cuando se le da click a los botones de editar */}
                     {editId === user.id ? (
                       <input
                         type="phone"
@@ -162,19 +274,15 @@ function Users() {
                     )}
                   </p>
 
-                  {/* Cuando está en la parte de editar se muestran estos dos botones, uno de Guardar y otro de Cancelar */}
                   {editId === user.id ? (
                     <div className="flex gap-4 mt-4">
                       <button
-                        // Este onclick actualiza el estado y guarda los datos que se pusieron nuevos
-                        // El .map si el id coincide con el que se editó, se crea el nuevo objeto editado
                         onClick={() => {
                           setUsers((prev) =>
                             prev.map((u) =>
                               u.id === user.id ? { ...u, ...editData } : u
                             )
                           );
-                          //Al dar clic en guardar, se oculta la parte de editar y se vuelve al normal
                           setEditId(null);
                         }}
                         className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded cursor-pointer"
@@ -189,13 +297,10 @@ function Users() {
                       </button>
                     </div>
                   ) : (
-                    // Cuando no se está en la parte de editar, sino en la normal, se muestran estos dos botones
                     <div className="flex gap-4 mt-4">
                       <button
                         onClick={() => {
-                          //setEditId sirve para controlar el usuario que se está actualizando
                           setEditId(user.id);
-                          //setEditData obtiene los datos que se cambiaron y los actualiza si el usuario lo guarda
                           setEditData({
                             name: user.name,
                             email: user.email,

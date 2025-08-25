@@ -43,7 +43,7 @@ function ReposList() {
   if (!repos) return null;
 
   return (
-    <div className="w-full px-2 sm:px-4">
+    <div className="w-full">
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {repos.map((repo) => (
           <li

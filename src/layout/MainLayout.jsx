@@ -46,7 +46,9 @@ function MainLayout() {
               theme === "light" ? "bg-gray-200" : "bg-gray-700"
             } rounded p-2 sm:p-4`}
           >
-            <h2 className="text-xl sm:text-2xl font-bold pt-2 sm:pt-4">Proyectos</h2>
+            <h2 className="text-xl sm:text-2xl pb-2 font-bold pt-2 sm:pt-4">
+              Proyectos
+            </h2>
             <ReposList></ReposList>
           </div>
         </div>
