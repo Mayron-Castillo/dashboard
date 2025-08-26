@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "../auth/ThemeContext";
+import UserForm from "../components/users/UserForm";
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editId, setEditId] = useState(null);
-  const [editData, setEditData] = useState({ name: "", email: "" });
+  const [editData, setEditData] = useState({ name: "", email: "", phone: "" });
   const [filter, setFilter] = useState("");
-  const [newUser, setNewUser] = useState({ name: "", email: "", phone: "" });
   const [addForm, setAddForm] = useState(false);
-  const [formError, setFormError] = useState("");
   const { theme } = useTheme();
 
   // Llamada a la API de jsonplaceholder
@@ -62,17 +61,28 @@ function Users() {
     return user.name.toLowerCase().includes(filter.toLowerCase());
   });
 
-  // Crear nuevo usuario
-  const handleAddUser = () => {
-    if (!newUser.name || !newUser.email || !newUser.phone) {
-      setFormError("Por favor complete todos los campos requeridos");
-      return false;
-    }
+  // Manejar la edición de usuario
+  const handleEditClick = (user) => {
+    setEditId(user.id);
+    setEditData({
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+    });
+  };
 
-    setUsers([...users, { ...newUser, id: Date.now() }]);
-    setNewUser({ name: "", email: "", phone: "" });
-    setFormError("");
-    return true;
+  // Crear nuevo usuario
+  const handleAddUser = (userData) => {
+    setUsers([...users, { ...userData, id: Date.now() }]);
+    setAddForm(false);
+  };
+
+  // Actualizar usuario existente
+  const handleSaveEdit = () => {
+    setUsers((prev) =>
+      prev.map((u) => (u.id === editId ? { ...u, ...editData } : u))
+    );
+    setEditId(null);
   };
 
   return (
@@ -89,7 +99,7 @@ function Users() {
         Usuarios
       </h1>
 
-      {/* Botón para mostrar formulario */}
+      {/* Botón para mostrar formulario de nuevo usuario */}
       {!addForm && (
         <div className="w-full flex justify-center mb-8">
           <button
@@ -104,88 +114,11 @@ function Users() {
       {/* Formulario para crear nuevo usuario */}
       {addForm && (
         <div className="w-full max-w-2xl mx-auto mb-8">
-          <div
-            className={`${
-              theme === "light"
-                ? "bg-white text-gray-600"
-                : "bg-gray-800 text-gray-300"
-            } rounded-lg p-6 border-2 border-gray-600`}
-          >
-            <h2 className="text-2xl font-semibold mb-4 text-center">
-              Nuevo Usuario
-            </h2>
-            <div className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  value={newUser.name}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, name: e.target.value })
-                  }
-                  className={`w-full p-2 border-2 ${
-                    theme === "light"
-                      ? "border-gray-600 bg-white"
-                      : "border-gray-600 bg-gray-700"
-                  } rounded`}
-                  placeholder="Nombre"
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  value={newUser.email}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, email: e.target.value })
-                  }
-                  className={`w-full p-2 border-2 ${
-                    theme === "light"
-                      ? "border-gray-600 bg-white"
-                      : "border-gray-600 bg-gray-700"
-                  } rounded`}
-                  placeholder="Tu correo"
-                />
-              </div>
-              <div>
-                <input
-                  type="tel"
-                  value={newUser.phone}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, phone: e.target.value })
-                  }
-                  className={`w-full p-2 border-2 ${
-                    theme === "light"
-                      ? "border-gray-600 bg-white"
-                      : "border-gray-600 bg-gray-700"
-                  } rounded`}
-                  placeholder="Teléfono"
-                />
-              </div>
-              {formError && (
-                <div className="mt-2 p-2 bg-red-100 border border-red-400 text-red-700 rounded text-center">
-                  {formError}
-                </div>
-              )}
-            </div>
-            <div className="flex justify-center gap-4 mt-6">
-              <button
-                onClick={() => {
-                  const success = handleAddUser();
-                  if (success) {
-                    setAddForm(false);
-                  }
-                }}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-medium cursor-pointer transition-colors"
-              >
-                Crear Usuario
-              </button>
-              <button
-                onClick={() => setAddForm(false)}
-                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded font-medium cursor-pointer transition-colors"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
+          <UserForm
+            onSave={handleAddUser}
+            onCancel={() => setAddForm(false)}
+            theme={theme}
+          />
         </div>
       )}
 
@@ -274,55 +207,43 @@ function Users() {
                     )}
                   </p>
 
-                  {editId === user.id ? (
-                    <div className="flex gap-4 mt-4">
-                      <button
-                        onClick={() => {
-                          setUsers((prev) =>
-                            prev.map((u) =>
-                              u.id === user.id ? { ...u, ...editData } : u
-                            )
-                          );
-                          setEditId(null);
-                        }}
-                        className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded cursor-pointer"
-                      >
-                        Guardar
-                      </button>
-                      <button
-                        onClick={() => setEditId(null)}
-                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1 rounded cursor-pointer"
-                      >
-                        Cancelar
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex gap-4 mt-4">
-                      <button
-                        onClick={() => {
-                          setEditId(user.id);
-                          setEditData({
-                            name: user.name,
-                            email: user.email,
-                            phone: user.phone,
-                          });
-                        }}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded cursor-pointer"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        onClick={() => {
-                          setUsers((prev) =>
-                            prev.filter((u) => u.id !== user.id)
-                          );
-                        }}
-                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded cursor-pointer"
-                      >
-                        Eliminar
-                      </button>
-                    </div>
-                  )}
+                  <div className="flex gap-4 mt-4">
+                    {editId === user.id ? (
+                      <>
+                        <button
+                          onClick={handleSaveEdit}
+                          className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded cursor-pointer"
+                        >
+                          Guardar
+                        </button>
+                        <button
+                          onClick={() => setEditId(null)}
+                          className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1 rounded cursor-pointer"
+                        >
+                          Cancelar
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => handleEditClick(user)}
+                          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded cursor-pointer"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => {
+                            setUsers((prev) =>
+                              prev.filter((u) => u.id !== user.id)
+                            );
+                          }}
+                          className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded cursor-pointer"
+                        >
+                          Eliminar
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
