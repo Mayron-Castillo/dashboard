@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "../auth/ThemeContext";
 import UserForm from "../components/users/UserForm";
+import UserCard from "../components/users/UserCard";
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editId, setEditId] = useState(null);
-  const [editData, setEditData] = useState({ name: "", email: "", phone: "" });
   const [filter, setFilter] = useState("");
   const [addForm, setAddForm] = useState(false);
   const { theme } = useTheme();
@@ -61,16 +61,6 @@ function Users() {
     return user.name.toLowerCase().includes(filter.toLowerCase());
   });
 
-  // Manejar la edición de usuario
-  const handleEditClick = (user) => {
-    setEditId(user.id);
-    setEditData({
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-    });
-  };
-
   // Crear nuevo usuario
   const handleAddUser = (userData) => {
     setUsers([...users, { ...userData, id: Date.now() }]);
@@ -78,11 +68,16 @@ function Users() {
   };
 
   // Actualizar usuario existente
-  const handleSaveEdit = () => {
-    setUsers((prev) =>
-      prev.map((u) => (u.id === editId ? { ...u, ...editData } : u))
+  const handleUpdateUser = (userId, updatedUser) => {
+    setUsers(prev => 
+      prev.map(u => u.id === userId ? { ...u, ...updatedUser } : u)
     );
     setEditId(null);
+  };
+
+  // Eliminar usuario
+  const handleDeleteUser = (userId) => {
+    setUsers(prev => prev.filter(u => u.id !== userId));
   };
 
   return (
@@ -151,101 +146,15 @@ function Users() {
         ) : (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {filterUsers.map((user) => (
-              <div
+              <UserCard
                 key={user.id}
-                className={`${
-                  theme === "light"
-                    ? "bg-white text-gray-600"
-                    : "bg-gray-800 text-gray-300"
-                } rounded-lg p-6 border-2 border-gray-600`}
-              >
-                {editId === user.id ? (
-                  <input
-                    type="text"
-                    value={editData.name}
-                    onChange={(e) =>
-                      setEditData({ ...editData, name: e.target.value })
-                    }
-                    className="text-xl font-semibold mb-3 border border-gray-600"
-                  />
-                ) : (
-                  <h2 className="text-xl font-semibold mb-3">{user.name}</h2>
-                )}
-                <hr
-                  className={theme === "light" ? "p-2" : "p-2 text-gray-600"}
-                />
-                <div className="flex flex-col gap-2">
-                  <p>
-                    <span className="font-medium pr-2">Email:</span>
-                    {editId === user.id ? (
-                      <input
-                        type="email"
-                        value={editData.email}
-                        onChange={(e) =>
-                          setEditData({ ...editData, email: e.target.value })
-                        }
-                        className="border border-gray-600"
-                      />
-                    ) : (
-                      user.email
-                    )}
-                  </p>
-
-                  <p>
-                    <span className="font-medium pr-2">Teléfono:</span>
-                    {editId === user.id ? (
-                      <input
-                        type="phone"
-                        value={editData.phone}
-                        onChange={(e) =>
-                          setEditData({ ...editData, phone: e.target.value })
-                        }
-                        className="border border-gray-600"
-                      />
-                    ) : (
-                      user.phone
-                    )}
-                  </p>
-
-                  <div className="flex gap-4 mt-4">
-                    {editId === user.id ? (
-                      <>
-                        <button
-                          onClick={handleSaveEdit}
-                          className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded cursor-pointer"
-                        >
-                          Guardar
-                        </button>
-                        <button
-                          onClick={() => setEditId(null)}
-                          className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1 rounded cursor-pointer"
-                        >
-                          Cancelar
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => handleEditClick(user)}
-                          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded cursor-pointer"
-                        >
-                          Editar
-                        </button>
-                        <button
-                          onClick={() => {
-                            setUsers((prev) =>
-                              prev.filter((u) => u.id !== user.id)
-                            );
-                          }}
-                          className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded cursor-pointer"
-                        >
-                          Eliminar
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
+                user={user}
+                editing={editId === user.id}
+                onEdit={setEditId}
+                onDelete={handleDeleteUser}
+                onSave={(updatedUser) => handleUpdateUser(user.id, updatedUser)}
+                theme={theme}
+              />
             ))}
           </div>
         )}
