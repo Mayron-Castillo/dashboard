@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from "../auth/ThemeContext";
+import { useTheme } from "../auth/ThemeContext.js";
 const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
 function Weather() {

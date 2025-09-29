@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useTheme } from "../auth/ThemeContext";
-import UserForm from "../components/users/UserForm";
-import UserCard from "../components/users/UserCard";
+import { useTheme } from "../auth/ThemeContext.js";
+import UserForm from "../components/users/UserForm.js";
+import UserCard from "../components/users/UserCard.js";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -69,15 +69,15 @@ function Users() {
 
   // Actualizar usuario existente
   const handleUpdateUser = (userId, updatedUser) => {
-    setUsers(prev => 
-      prev.map(u => u.id === userId ? { ...u, ...updatedUser } : u)
+    setUsers((prev) =>
+      prev.map((u) => (u.id === userId ? { ...u, ...updatedUser } : u))
     );
     setEditId(null);
   };
 
   // Eliminar usuario
   const handleDeleteUser = (userId) => {
-    setUsers(prev => prev.filter(u => u.id !== userId));
+    setUsers((prev) => prev.filter((u) => u.id !== userId));
   };
 
   return (

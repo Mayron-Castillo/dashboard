@@ -1,11 +1,11 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Login from "./auth/Login";
-import PrivateRoute from "./routes/PrivateRoute";
-import Home from "./pages/Home";
-import Navbar from "./layout/Navbar";
-import Users from "./pages/Users";
-import { useTheme } from "./auth/ThemeContext";
+import Login from "./auth/Login.js";
+import PrivateRoute from "./routes/PrivateRoute.js";
+import Home from "./pages/Home.js";
+import Navbar from "./layout/Navbar.js";
+import Users from "./pages/Users.js";
+import { useTheme } from "./auth/ThemeContext.js";
 
 function App() {
   const { theme } = useTheme();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useTheme } from "../auth/ThemeContext";
+import { useTheme } from "../auth/ThemeContext.js";
 const token = import.meta.env.VITE_GITHUB_TOKEN;
 const username = import.meta.env.VITE_GITHUB_USER;
 

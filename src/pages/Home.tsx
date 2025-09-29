@@ -1,8 +1,8 @@
 import React from "react";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/AuthContext.js";
 import { Link } from "react-router-dom";
-import { useTheme } from "../auth/ThemeContext";
-import MainLayout from "../layout/MainLayout";
+import { useTheme } from "../auth/ThemeContext.js";
+import MainLayout from "../layout/MainLayout.js";
 
 function Home() {
   const { user } = useAuth();
@@ -29,7 +29,11 @@ function Home() {
       ) : (
         // Esto es lo que se va a mostrar primeramente al ejecutar el programa
         <div className="text-xl sm:text-2xl flex flex-col gap-3 sm:gap-4 justify-center items-center min-h-screen px-4 text-center">
-          <h1 className={`${theme === "light" ? "text-black" : "text-white"} text-xl sm:text-2xl`}>
+          <h1
+            className={`${
+              theme === "light" ? "text-black" : "text-white"
+            } text-xl sm:text-2xl`}
+          >
             Bienvenido, debes iniciar sesión
           </h1>
           <Link

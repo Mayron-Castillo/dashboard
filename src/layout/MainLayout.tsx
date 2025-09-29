@@ -1,9 +1,9 @@
 import React from "react";
-import ReposList from "../components/ReposList";
-import Profile from "../components/Profile";
-import { useTheme } from "../auth/ThemeContext";
-import Weather from "../components/Weather";
-import RecentCommits from "../components/RecentCommits";
+import ReposList from "../components/ReposList.js";
+import Profile from "../components/Profile.js";
+import { useTheme } from "../auth/ThemeContext.js";
+import Weather from "../components/Weather.js";
+import RecentCommits from "../components/RecentCommits.js";
 
 function MainLayout() {
   const { theme } = useTheme();

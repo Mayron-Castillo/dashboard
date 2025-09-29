@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../auth/AuthContext";
-import { useTheme } from "../auth/ThemeContext";
+import { useAuth } from "../auth/AuthContext.js";
+import { useTheme } from "../auth/ThemeContext.js";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
