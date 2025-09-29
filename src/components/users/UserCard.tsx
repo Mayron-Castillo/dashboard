@@ -1,4 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, type ChangeEvent } from "react";
+
+//Interfaz para el objeto user
+interface User {
+  id: string | number;
+  name: string;
+  email: string;
+  phone: string;
+}
+
+//Interfaz para la parte de editar
+interface EditData {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+//interfaz para las props
+interface UserCardProps {
+  user: User;
+  onEdit: (userId: string | number | null) => void;
+  onDelete: (userId: string | number) => void;
+  onSave: (userData: EditData) => void;
+  editing: boolean;
+  theme?: "light" | "dark";
+}
 
 function UserCard({
   user,
@@ -7,15 +32,15 @@ function UserCard({
   onSave,
   editing,
   theme = "light",
-}) {
-  const [editData, setEditData] = useState({
+}: UserCardProps) {
+  const [editData, setEditData] = useState<EditData>({
     name: user.name,
     email: user.email,
     phone: user.phone,
   });
 
   // Actualiza el estado de los campos mientras el usuario escribe
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEditData({
       ...editData,
       [e.target.name]: e.target.value,
