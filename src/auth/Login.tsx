@@ -3,6 +3,11 @@ import { useAuth } from "./AuthContext.js";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+interface LoginFormData {
+  username: string;
+  password: string;
+}
+
 function Login() {
   const { login } = useAuth();
   const [error, setError] = useState("");
@@ -12,16 +17,18 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormData>();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: LoginFormData) => {
     try {
       setError("");
       setIsLoading(true);
       await login(data);
       navigate("/");
-    } catch (error) {
-      setError(error.message);
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Hubo un error";
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +74,7 @@ function Login() {
             {/* Si hay error lo captura y lo muestra debajo del input con texto en rojo */}
             {errors.username && (
               <p className="mt-1 text-sm text-red-600">
-                {errors.username.message}
+                {errors.username?.message}
               </p>
             )}
           </div>
@@ -96,7 +103,7 @@ function Login() {
             {/* Si hay error lo captura y lo muestra debajo de la contraseña con texto en rojo */}
             {errors.password && (
               <p className="mt-1 text-sm text-red-600">
-                {errors.password.message}
+                {errors.password?.message}
               </p>
             )}
           </div>
