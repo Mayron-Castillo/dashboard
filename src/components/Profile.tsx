@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "../auth/ThemeContext.js";
+
 const username = import.meta.env.VITE_GITHUB_USER;
 const token = import.meta.env.VITE_GITHUB_TOKEN;
 
+interface GitHubProfile {
+  name: string;
+  avatar_url: string;
+  login: string;
+  followers: number;
+  following: number;
+  location: string;
+  email: string;
+  created_at: string;
+}
+
 function Profile() {
-  const [profile, setProfile] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState<GitHubProfile | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const { theme } = useTheme();
 
   // Se llama a la API de github para acceder a mi Usuario
@@ -22,7 +34,9 @@ function Profile() {
         const data = await res.json();
         setProfile(data);
       } catch (err) {
-        setError(err.message);
+        const errorMessage =
+          err instanceof Error ? err.message : "Hubo un error";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -65,12 +79,11 @@ function Profile() {
             </p>
             <div className="flex">
               <svg
-                class="octicon octicon-location"
+                className="flex justify-center items-center w-4 octicon octicon-location"
                 viewBox="0 0 16 16"
                 version="1.1"
                 aria-hidden="true"
                 fill={theme === "light" ? "black" : "white"}
-                className="flex justify-center items-center w-4"
               >
                 <path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"></path>
               </svg>
@@ -78,12 +91,11 @@ function Profile() {
             </div>
             <div className="flex">
               <svg
-                class="octicon octicon-mail"
+                className="flex justify-center items-center w-4 octicon octicon-mail"
                 viewBox="0 0 16 16"
                 version="1.1"
                 aria-hidden="true"
                 fill={theme === "light" ? "black" : "white"}
-                className="flex justify-center items-center w-4"
               >
                 <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"></path>
               </svg>
