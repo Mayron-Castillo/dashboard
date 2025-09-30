@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, type ChangeEvent, type FormEvent } from "react";
 
-function UserForm({ onSave, onCancel, theme = "light" }) {
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+interface UserFormProps {
+  onSave: (formData: FormData) => void;
+  onCancel: () => void;
+  theme?: "light" | "dark";
+}
+
+function UserForm({ onSave, onCancel, theme = "light" }: UserFormProps) {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
   });
-  const [formError, setFormError] = useState("");
+  const [formError, setFormError] = useState<string>("");
 
   // Actualiza el estado de formData copiando lo que se pasa en los inputs
   // y modifica solo el campo que coincide con el name que tiene el input
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -18,7 +30,7 @@ function UserForm({ onSave, onCancel, theme = "light" }) {
   };
 
   //Valida que todos los campos estén completos, si hay un error muestra el mensaje y si todo está bien ejecuta el onSvae con los datos
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) {
       setFormError("Por favor complete todos los campos requeridos");
