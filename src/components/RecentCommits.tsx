@@ -3,15 +3,38 @@ import { useTheme } from "../auth/ThemeContext.js";
 
 const username = import.meta.env.VITE_GITHUB_USER;
 
+// Interfaz para el commit
+interface GithubCommit {
+  sha: string;
+  message: string;
+}
+
+//interfaz para el nombre del repo
+interface GithubRepo {
+  name: string;
+}
+
+//interfaz del payload donde sacamos los commits
+interface GithubPayload {
+  commits: GithubCommit[];
+}
+
+//interfaz del evento
+interface GithubEvent {
+  type: string;
+  payload: GithubPayload;
+  repo: GithubRepo;
+}
+
 function RecentActivity() {
-  const [commits, setCommits] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [commits, setCommits] = useState<GithubEvent[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const { theme } = useTheme();
 
   // Se llama a la API de github en la que se trae los eventos de mi usuario
   useEffect(() => {
-    const getActivity = async () => {
+    const getActivity = async (): Promise<void> => {
       try {
         const res = await fetch(
           `https://api.github.com/users/${username}/events`
@@ -19,16 +42,18 @@ function RecentActivity() {
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const data = await res.json();
+        const data: GithubEvent[] = await res.json();
 
         // Se filtran los eventos, type son PushEvent, y con el slice se acceden a los últimos 4 commits
         const recentCommits = data
-          .filter((event) => event.type === "PushEvent")
+          .filter((event: GithubEvent) => event.type === "PushEvent")
           .slice(0, 4);
 
         setCommits(recentCommits);
       } catch (err) {
-        setError(err.message);
+        const errorMessage =
+          err instanceof Error ? err.message : "Hubo un error";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -49,7 +74,7 @@ function RecentActivity() {
     >
       <ul>
         {/* Se hace un .map de  los eventos, al paylad.commits se accede a los commits */}
-        {commits.map((event) =>
+        {commits.map((event: GithubEvent) =>
           event.payload.commits.map((commit) => (
             <li
               key={commit.sha}
