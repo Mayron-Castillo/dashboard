@@ -3,16 +3,22 @@ import { useTheme } from "../auth/ThemeContext.js";
 const token = import.meta.env.VITE_GITHUB_TOKEN;
 const username = import.meta.env.VITE_GITHUB_USER;
 
+interface Repos {
+  id: number;
+  name: string;
+  html_url: string;
+}
+
 function ReposList() {
-  const [repos, setRepos] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [repos, setRepos] = useState<Repos[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const { theme } = useTheme();
 
   // Llamo a la API para acceder a los repositorios
   // El token en si no es necesario, pero lo uso por si llegara a necesitar acceder a un repositorio privado
   useEffect(() => {
-    const getRepos = async () => {
+    const getRepos = async (): Promise<void> => {
       try {
         const res = await fetch(
           `https://api.github.com/users/${username}/repos?sort=updated`,
@@ -25,10 +31,12 @@ function ReposList() {
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const data = await res.json();
+        const data: Repos[] = await res.json();
         setRepos(data);
       } catch (err) {
-        setError(err.message);
+        const errorMessage =
+          err instanceof Error ? err.message : "Hubo un error";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -45,7 +53,7 @@ function ReposList() {
   return (
     <div className="w-full">
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {repos.map((repo) => (
+        {repos.map((repo: Repos) => (
           <li
             key={repo.id}
             className={`${
