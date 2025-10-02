@@ -2,10 +2,40 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "../auth/ThemeContext.js";
 const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
+//Interfaz para la location
+interface WeatherLocation {
+  name: string;
+  region: string;
+  country: string;
+  localtime: string;
+}
+
+//interfaz para la condition dentro de current
+interface WeatherCondition {
+  text: string;
+  icon: string;
+}
+
+//Interfaz del current
+interface WeatherCurrent {
+  temp_c: number;
+  condition: WeatherCondition;
+  humidity: number;
+  wind_kph: number;
+  gust_kph: number;
+  precip_mm: number;
+}
+
+//Interfaz de los objetos de la API location y current
+interface WeatherApi {
+  location: WeatherLocation;
+  current: WeatherCurrent;
+}
+
 function Weather() {
-  const [weather, setWeather] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [weather, setWeather] = useState<WeatherApi | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const { theme } = useTheme();
 
   // Llamada a la API de weatherapi especificamente la llamada a Costa Rica
@@ -23,7 +53,9 @@ function Weather() {
           setWeather(data);
         }
       } catch (error) {
-        setError(error.message);
+        const errorMessage =
+          error instanceof Error ? error.message : "Hubo un error";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
