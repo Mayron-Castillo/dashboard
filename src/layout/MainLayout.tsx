@@ -1,4 +1,3 @@
-import React from "react";
 import ReposList from "../components/ReposList.js";
 import Profile from "../components/Profile.js";
 import { useTheme } from "../auth/ThemeContext.js";

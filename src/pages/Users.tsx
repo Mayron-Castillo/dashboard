@@ -3,18 +3,25 @@ import { useTheme } from "../auth/ThemeContext.js";
 import UserForm from "../components/users/UserForm.js";
 import UserCard from "../components/users/UserCard.js";
 
+interface UserData {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+}
+
 function Users() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [editId, setEditId] = useState(null);
-  const [filter, setFilter] = useState("");
-  const [addForm, setAddForm] = useState(false);
+  const [users, setUsers] = useState<UserData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [editId, setEditId] = useState<number | null>(null);
+  const [filter, setFilter] = useState<string>("");
+  const [addForm, setAddForm] = useState<boolean>(false);
   const { theme } = useTheme();
 
   // Llamada a la API de jsonplaceholder
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsers = async (): Promise<void> => {
       try {
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/users"
@@ -22,10 +29,12 @@ function Users() {
         if (!response.ok) {
           throw new Error("Hubo un error al cargar los usuarios");
         }
-        const data = await response.json();
+        const data: UserData[] = await response.json();
         setUsers(data);
-      } catch (e) {
-        setError(e);
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Hubo un error";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -52,23 +61,26 @@ function Users() {
           theme === "light" ? "bg-white" : "bg-gray-800"
         } min-h-screen`}
       >
-        {error.message}
+        {error}
       </p>
     );
 
   // Filtro para buscar a los usuarios en el input
-  const filterUsers = users.filter((user) => {
+  const filterUsers = users.filter((user: UserData) => {
     return user.name.toLowerCase().includes(filter.toLowerCase());
   });
 
-  // Crear nuevo usuario
-  const handleAddUser = (userData) => {
+  // Crear nuevo usuario, Omit, omite el id porque ya genera uno nuevo
+  const handleAddUser = (userData: Omit<UserData, "id">): void => {
     setUsers([...users, { ...userData, id: Date.now() }]);
     setAddForm(false);
   };
 
-  // Actualizar usuario existente
-  const handleUpdateUser = (userId, updatedUser) => {
+  // Actualizar usuario existente, Partial, es opcional las propiedades
+  const handleUpdateUser = (
+    userId: number,
+    updatedUser: Partial<UserData>
+  ): void => {
     setUsers((prev) =>
       prev.map((u) => (u.id === userId ? { ...u, ...updatedUser } : u))
     );
@@ -76,8 +88,13 @@ function Users() {
   };
 
   // Eliminar usuario
-  const handleDeleteUser = (userId) => {
+  const handleDeleteUser = (userId: string | number): void => {
     setUsers((prev) => prev.filter((u) => u.id !== userId));
+  };
+
+  //Editar usuario, recibe ID, si es string lo convierte a numero
+  const handleEditUser = (userId: string | number | null): void => {
+    setEditId(typeof userId === "string" ? parseInt(userId) : userId);
   };
 
   return (
@@ -145,12 +162,12 @@ function Users() {
           </p>
         ) : (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {filterUsers.map((user) => (
+            {filterUsers.map((user: UserData) => (
               <UserCard
                 key={user.id}
                 user={user}
                 editing={editId === user.id}
-                onEdit={setEditId}
+                onEdit={handleEditUser}
                 onDelete={handleDeleteUser}
                 onSave={(updatedUser) => handleUpdateUser(user.id, updatedUser)}
                 theme={theme}

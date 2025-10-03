@@ -75,6 +75,7 @@ function UserCard({
         <>
           <input
             type="text"
+            name="name"
             value={editData.name}
             onChange={handleChange}
             className="text-xl font-semibold mb-3 border border-gray-600"
